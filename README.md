@@ -3,12 +3,12 @@
 
 ### Get the code
 
-    git clone https://github.com/rgdevops123/devopsweb.git
-    cd devopsweb
+    $ git clone https://github.com/rgdevops123/devopsweb.git
+    $ cd devopsweb
 
 ### Install requirements
 
-    pip install -r requirements.txt
+    $ pip install -r requirements.txt
 
 
 ####   *** Running th Application ***
@@ -42,7 +42,7 @@
 
 ###   *** Database Migrations ***
              *** Method 1 ***
-    $ ### Source the environment file.
+       ### Source the environment file.
     $ cd ../devopsweb
     $ export FLASK_APP=devopsweb.py
     $ vim app/models.py
@@ -52,7 +52,7 @@
     $ flask db upgrade
 
              *** Method 2 ***
-    $ ### Source the environment file.
+        ### Source the environment file.
     $ cd ../devopsweb
     $ export FLASK_APP=devopsweb.py
     $ vim app/models.py
