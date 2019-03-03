@@ -1,0 +1,13 @@
+bcrypt
+coveralls
+coverage
+flask
+flask_login
+flask_migrate
+flask_sqlalchemy
+flask_wtf
+gunicorn
+psycopg2
+pytest
+python-dotenv
+selenium
