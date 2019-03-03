@@ -6,9 +6,21 @@
     $ git clone https://github.com/rgdevops123/devopsweb.git
     $ cd devopsweb
 
+
+### Install Python 3
+
+    $ sudo yum -y update
+    $ sudo yum -y install yum-utils
+    $ sudo yum -y groupinstall development
+    $ sudo yum -y install python3
+
+    $ python3 -V
+        Python 3.7.1
+
+
 ### Install requirements
 
-    $ pip install -r requirements.txt
+    $ sudo pip3 install -r requirements.txt
 
 
 ####   *** Running th Application ***
@@ -27,6 +39,28 @@
     SECRET_KEY='your-secret-key'
     ###Use For Development###SQLALCHEMY_DATABASE_URI='sqlite:////db/database.db'
     SQLALCHEMY_TRACK_MODIFICATIONS=False
+
+
+### Create a devopsweb profile file.
+
+    $ vim .devopsweb_profile
+    export DEVOPSWEB_CONFIG_MODE=Debug
+    export MAIL_SERVER='you.email.server'
+    export MAIL_PORT=your-mail-port
+    export MAIL_USE_TLS=True
+    export MAIL_USERNAME='your-email@example.com'
+    export MAIL_PASSWORD='your-password'
+    export POSTGRES_USER=your-database-user
+    export POSTGRES_PASSWORD=your-database-password
+    export POSTGRES_DB=your-database-name
+    export SECRET_KEY='your-secret-key'
+    export SQLALCHEMY_DATABASE_URI_DEBUG='sqlite:////db/database.db'
+    export SQLALCHEMY_TRACK_MODIFICATIONS=False
+
+
+### Source your devopsweb profile file.
+
+    $ . ./.devopsweb_profile
 
 
 ###   *** Set FLASK_APP ***

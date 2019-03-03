@@ -3,6 +3,7 @@ coveralls
 coverage
 flask
 flask_login
+flask_mail
 flask_migrate
 flask_sqlalchemy
 flask_wtf
