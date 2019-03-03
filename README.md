@@ -25,7 +25,8 @@
 
 ####   *** Running th Application ***
     ============================================
-       *** Update the .env file entries ***
+
+### Create a .env file.
     $ vim .env
     DEVOPSWEB_CONFIG_MODE=Production
     MAIL_SERVER='smtp.example.com'
