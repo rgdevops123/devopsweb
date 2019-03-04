@@ -29,17 +29,17 @@
     $ rm OpenSSL_1_0_2l.tar.gz
     $ rm -rf openssl-OpenSSL_1_0_2l/
     
-    $ wget https://www.python.org/ftp/python/3.6.0/Python-3.6.0.tar.xz
-    $ tar xJf Python-3.6.0.tar.xz
-    $ cd Python-3.6.0
+    $ wget https://www.python.org/ftp/python/3.6.5/Python-3.6.5.tar.xz
+    $ tar xJf Python-3.6.5.tar.xz
+    $ cd Python-3.6.5
     
     $ ./configure
     $ make
     $ sudo make install
     
     $ cd ..
-    $ rm Python-3.6.0.tar.xz
-    $ sudo rm -rf Python-3.6.0
+    $ rm Python-3.6.5.tar.xz
+    $ sudo rm -rf Python-3.6.5
 
 
 ### Install requirements
