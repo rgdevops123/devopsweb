@@ -7,7 +7,7 @@
     $ cd devopsweb
 
 
-### Install Python 3
+### Install Python 3.6.5
 
     $ sudo yum -y update
     $ sudo yum -y install yum-utils
