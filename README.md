@@ -88,18 +88,18 @@
     $ . ./.devopsweb_profile
 
 
-###   *** Set FLASK_APP ***
+### Set FLASK APP
     $ export FLASK_APP=devopsweb.py
 
 
-###   *** Run the Application ***
+### Run the Application
     $ flask run --host=0.0.0.0 --port=5000
 
 
 
     ============================================
 
-###   *** Database Migrations ***
+### Database Migrations
              *** Method 1 ***
        ### Source the environment file.
     $ cd ../devopsweb
