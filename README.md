@@ -1,7 +1,7 @@
 # devopsweb
 ### Dev Ops Web
 
-### Get the code
+### Get the code.
 
     $ git clone https://github.com/rgdevops123/devopsweb.git
     $ cd devopsweb
