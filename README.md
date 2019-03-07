@@ -1,7 +1,7 @@
 # devopsweb
 ### Dev Ops Web
 
-### Get the code.
+### Get the code
 
     $ git clone https://github.com/rgdevops123/devopsweb.git
     $ cd devopsweb
@@ -42,14 +42,13 @@
     $ sudo rm -rf Python-3.6.5
 
 
-### Install requirements
+### Install Requirements
 
     $ sudo /usr/local/bin/pip3 install -r requirements.txt
 
  
-    ============================================
 ### Running th Application
-    ============================================
+### ============================================
 
 ### Create a .env file.
     $ vim .env
