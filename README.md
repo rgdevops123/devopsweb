@@ -46,8 +46,9 @@
 
     $ sudo /usr/local/bin/pip3 install -r requirements.txt
 
-
-####   *** Running th Application ***
+ 
+    ============================================
+### Running th Application
     ============================================
 
 ### Create a .env file.
