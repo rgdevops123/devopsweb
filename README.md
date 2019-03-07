@@ -47,8 +47,8 @@
     $ sudo /usr/local/bin/pip3 install -r requirements.txt
 
  
-### Running th Application
 ### ============================================
+### Running th Application
 
 ### Create a .env file.
     $ vim .env
@@ -97,8 +97,7 @@
 
 
 
-    ============================================
-
+### ============================================
 ### Database Migrations
              *** Method 1 ***
        ### Source the environment file.
