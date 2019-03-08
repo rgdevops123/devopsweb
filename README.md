@@ -93,6 +93,10 @@
 
 
 ### Run the Application
+       Using gunicorn.
+    $ /usr/bin/gunicorn --config gunicorn.py devopsweb:app &
+
+       Using flask.
     $ flask run --host=0.0.0.0 --port=5000
 
 
