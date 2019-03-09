@@ -62,14 +62,14 @@
     POSTGRES_PASSWORD=your-database-password
     POSTGRES_DB=your-database-name
     SECRET_KEY='your-secret-key'
-    ###Use For Development###SQLALCHEMY_DATABASE_URI='sqlite:////db/database.db'
+    ###Use For Development###SQLALCHEMY_DATABASE_URI='sqlite:////tmp/database.db'
     SQLALCHEMY_TRACK_MODIFICATIONS=False
 
 
 ### Create a devopsweb profile file.
 
     $ vim .devopsweb_profile
-    export DEVOPSWEB_CONFIG_MODE=Debug
+    export DEVOPSWEB_CONFIG_MODE=Production
     export MAIL_SERVER='you.email.server'
     export MAIL_PORT=your-mail-port
     export MAIL_USE_TLS=True
@@ -79,7 +79,7 @@
     export POSTGRES_PASSWORD=your-database-password
     export POSTGRES_DB=your-database-name
     export SECRET_KEY='your-secret-key'
-    export SQLALCHEMY_DATABASE_URI_DEBUG='sqlite:////db/database.db'
+    export SQLALCHEMY_DATABASE_URI_DEBUG='sqlite:////tmp/database.db'
     export SQLALCHEMY_TRACK_MODIFICATIONS=False
 
 
