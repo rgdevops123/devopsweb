@@ -1,6 +1,6 @@
 # Environment File
 .env
-.devopsweb_profile
+.env.sh
 
 # byte-compiled / optimized / DLL files
 __pycache__/

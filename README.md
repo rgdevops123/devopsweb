@@ -13,8 +13,7 @@
     $ sudo yum -y install yum-utils
 
     $ sudo yum -y groupinstall development
-    $ sudo yum -y install zlib-devel
-    $ sudo yum -y install openssl-devel
+    $ sudo yum -y install openssl-devel sqlite-devel vim wget zlib-devel
     
     $ wget https://github.com/openssl/openssl/archive/OpenSSL_1_0_2l.tar.gz
     $ tar -zxvf OpenSSL_1_0_2l.tar.gz 
@@ -50,25 +49,9 @@
 ### ============================================
 ### Running th Application
 
-### Create a .env file.
-    $ vim .env
-    DEVOPSWEB_CONFIG_MODE=Production
-    MAIL_SERVER='smtp.example.com'
-    MAIL_PORT=your-mail-port
-    MAIL_USE_TLS=True
-    MAIL_USERNAME='your-email@example.com'
-    MAIL_PASSWORD='your-password'
-    POSTGRES_USER=your-database-user
-    POSTGRES_PASSWORD=your-database-password
-    POSTGRES_DB=your-database-name
-    SECRET_KEY='your-secret-key'
-    ###Use For Development###SQLALCHEMY_DATABASE_URI='sqlite:////tmp/database.db'
-    SQLALCHEMY_TRACK_MODIFICATIONS=False
+### Create a .env.sh file for flask and gunicorn.
 
-
-### Create a devopsweb profile file.
-
-    $ vim .devopsweb_profile
+    $ vim .env.sh
     export DEVOPSWEB_CONFIG_MODE=Production
     export MAIL_SERVER='you.email.server'
     export MAIL_PORT=your-mail-port
@@ -83,9 +66,25 @@
     export SQLALCHEMY_TRACK_MODIFICATIONS=False
 
 
-### Source your devopsweb profile file.
+### Create a .env file for docker-compose and docker --env-file option.
+    $ vim .env
+    DEVOPSWEB_CONFIG_MODE=Production
+    MAIL_SERVER=smtp.example.com
+    MAIL_PORT=your-mail-port
+    MAIL_USE_TLS=True
+    MAIL_USERNAME=your-email@example.com
+    MAIL_PASSWORD=your-password
+    POSTGRES_USER=your-database-user
+    POSTGRES_PASSWORD=your-database-password
+    POSTGRES_DB=your-database-name
+    SECRET_KEY=your-secret-key
+    ###Use For Development###SQLALCHEMY_DATABASE_URI=sqlite:////tmp/database.db
+    SQLALCHEMY_TRACK_MODIFICATIONS=False
 
-    $ . ./.devopsweb_profile
+
+### Source your devopsweb profile file commands "flask" and "gunicorn".
+
+    $ . ./.env.sh
 
 
 ### Set FLASK APP
