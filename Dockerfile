@@ -2,7 +2,7 @@ FROM rgdevops123/rgcentos7.6
 
 ENV FLASK_APP devopsweb.py
 
-COPY devopsweb.py gunicorn.py requirements.txt config.py .env ./
+COPY config.py devopsweb.py gunicorn.py requirements.txt .env ./
 COPY app app
 COPY migrations migrations
 
