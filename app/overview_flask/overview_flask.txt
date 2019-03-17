@@ -12,11 +12,11 @@ $ vim hello.py
 
 First we imported the Flask class.  An instance of this class will be our WSGI application.
 
-Next we create an instance of this class.  The first argument is the name of the application’s module or package.  This is needed so that Flask knows where to look for templates, static files, etc... 
+Next we create an instance of this class.  The first argument is the name of the application's module or package.  This is needed so that Flask knows where to look for templates, static files, etc... 
 
 Next we use the route() decorator to tell Flask what URL should trigger our function.
 
-The function is given a name which is also used to generate URLs for that particular function, and returns the message we want to display in the user’s browser.
+The function is given a name which is also used to generate URLs for that particular function, and returns the message we want to display in the user's browser.
 
 
          *** Running the Application ***
