@@ -92,9 +92,9 @@ Ansible does not use an agent to automate tasks on different machines.
 
  
 
-   *** Test Connectivity of the servers under the webserver’s group *** 
+   *** Test Connectivity of the servers under the webserver's group *** 
 
-      $ ansible webservers –m ping
+      $ ansible webservers -m ping
 
          172.16.91.182 | SUCCESS => {
              "changed": false,
@@ -117,7 +117,7 @@ Ansible does not use an agent to automate tasks on different machines.
 
 Gather information about target machines network, hardware, OS version, memory, etc...
 
-      $ ansible webservers –m setup
+      $ ansible webservers -m setup
 
 
 
