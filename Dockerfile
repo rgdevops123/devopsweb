@@ -10,7 +10,7 @@ RUN yum -y update
 RUN yum -y install epel-release && yum clean all
 
 RUN yum -y groupinstall development
-RUN yum -y install openssl-devel sqlite-devel vim wget zlib-devel
+RUN yum -y install openssl-devel postfix sqlite-devel vim wget zlib-devel
 
 RUN wget --quiet https://github.com/openssl/openssl/archive/OpenSSL_1_0_2l.tar.gz > /dev/null 2>&1 && \
 tar -zxvf OpenSSL_1_0_2l.tar.gz && \
@@ -26,6 +26,9 @@ cd Python-3.6.5 && \
 ./configure > /dev/null 2>&1 && \
 make > /dev/null 2>&1 && \
 make install > /dev/null 2>&1
+
+RUN systemctl enable postfix
+RUN systemctl start postfix
 
 RUN /usr/local/bin/pip3 install -r requirements.txt
 

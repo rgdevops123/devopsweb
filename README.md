@@ -13,7 +13,7 @@
     $ sudo yum -y install yum-utils
 
     $ sudo yum -y groupinstall development
-    $ sudo yum -y install openssl-devel sqlite-devel vim wget zlib-devel
+    $ sudo yum -y install openssl-devel postfix sqlite-devel vim wget zlib-devel
     
     $ wget https://github.com/openssl/openssl/archive/OpenSSL_1_0_2l.tar.gz
     $ tar -zxvf OpenSSL_1_0_2l.tar.gz 
