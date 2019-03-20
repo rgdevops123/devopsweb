@@ -69,7 +69,7 @@
 ### Create a .env file for docker-compose and docker --env-file option.
     $ vim .env
     DEVOPSWEB_CONFIG_MODE=Production
-    MAIL_SERVER=smtp.example.com
+    MAIL_SERVER=your-mail-server   ###Set to localhost if using local Postfix Mail Server.
     MAIL_PORT=your-mail-port
     MAIL_USE_TLS=True
     MAIL_USERNAME=your-email@example.com
