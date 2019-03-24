@@ -6,6 +6,7 @@ flask_login
 flask_mail
 flask_migrate
 flask_sqlalchemy
+flask_testing
 flask_wtf
 gunicorn
 psycopg2

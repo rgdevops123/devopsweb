@@ -29,11 +29,17 @@ class DebugConfig(Config):
     DEBUG = True
 
 
-class ManageDebugConfig(Config):
+class TestConfig(Config):
     DEBUG = True
+    TESTING = True
+    WTF_CSRF_ENABLED = False
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:' 
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SECRET_KEY = '12346789'
 
 
 config_dict = {
     'Production': ProductionConfig,
-    'Debug': DebugConfig
+    'Debug': DebugConfig,
+    'Test': TestConfig
 }

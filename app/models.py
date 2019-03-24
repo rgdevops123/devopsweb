@@ -2,7 +2,7 @@ from bcrypt import gensalt, hashpw
 from flask import current_app
 from flask_login import UserMixin
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
-from sqlalchemy import Binary, Column, Integer, String
+from sqlalchemy import LargeBinary, Column, Integer, String
 
 from app import db, login_manager
 
@@ -14,7 +14,7 @@ class User(db.Model, UserMixin):
     id = Column(Integer, primary_key=True)
     username = Column(String, unique=True)
     email = Column(String, unique=True)
-    password = Column(Binary)
+    password = Column(LargeBinary)
     phone = Column(String)
     mobile = Column(String)
     department = Column(String)

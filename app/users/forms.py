@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from flask_login import current_user
-from wtforms import PasswordField, SubmitField, TextField
+from wtforms import PasswordField, SubmitField, StringField
 from wtforms.validators import DataRequired, Email, EqualTo, Length, ValidationError
 from app.models import User
 
@@ -8,14 +8,14 @@ from app.models import User
 
 
 class LoginForm(FlaskForm):
-    email = TextField('Email', validators=[DataRequired(), Email()])
+    email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
 
 
 class RegistrationForm(FlaskForm):
-    username = TextField('Username',
+    username = StringField('Username',
                          validators=[DataRequired(), Length(min=3, max=23)])
-    email = TextField('Email',
+    email = StringField('Email',
                       validators=[DataRequired(), Email()])
     password = PasswordField('Password', 
                              validators=[DataRequired()])
@@ -24,11 +24,11 @@ class RegistrationForm(FlaskForm):
 
 
 class UpdateAccountForm(FlaskForm):
-    username = TextField('Username',
+    username = StringField('Username',
                          validators=[DataRequired(), Length(min=3, max=23)])
-    email = TextField('Email',
+    email = StringField('Email',
                         validators=[DataRequired(), Email()])
-    company = TextField('Company',
+    company = StringField('Company',
                            validators=[Length(max=30)])
     submit = SubmitField('Update')
 
@@ -45,7 +45,7 @@ class UpdateAccountForm(FlaskForm):
                 raise ValidationError('That email is taken. Please choose a different one.')
 
 class RequestResetForm(FlaskForm):
-    email = TextField('Email',
+    email = StringField('Email',
                         validators=[DataRequired(), Email()])
     submit = SubmitField('Request Password Reset')
 
