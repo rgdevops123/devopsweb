@@ -40,6 +40,20 @@ class FlaskTestCase(BaseTestCase):
         response = self.client.get('/login', content_type='html/text')
         self.assertEqual(response.status_code, 200)
 
+    # Ensure that main page requires user login
+    def test_main_route_requires_login(self):
+        response = self.client.get('/', follow_redirects=True)
+        self.assertIn(b'Login Form', response.data)
+
+    # Ensure that user goes to home page after login
+    def test_home_page(self):
+        response = self.client.post(
+            '/login',
+            data=dict(email="admin@test.com", password="admin"),
+            follow_redirects=True
+        )
+        self.assertIn(b'System Configuration', response.data)
+
 
 if __name__ == '__main__':
     unittest.main()
