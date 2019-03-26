@@ -1,5 +1,3 @@
-import unittest
-
 from flask_login import current_user
 from flask_testing import TestCase
 from bcrypt import checkpw, gensalt, hashpw
@@ -7,6 +5,13 @@ from bcrypt import checkpw, gensalt, hashpw
 from config import config_dict
 from app import create_app, db
 from app.models import User
+
+import logging
+import unittest
+
+
+# Don't show logging messages while testing.
+logging.disable(logging.CRITICAL)
 
 
 class BaseTestCase(TestCase):

@@ -8,7 +8,7 @@ __pycache__/
 
 # tests and coverage
 *.pytest_cache
-.coverage
+coverage
 
 # database & logs
 *.db
