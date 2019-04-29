@@ -29,6 +29,7 @@ def register_blueprints(app):
                         'overview_docker', 
                         'overview_flask', 
                         'overview_kubernetes', 
+                        'overview_linux', 
                         'overview_postgresql', 
                         'overview_sqlite',
                         'users'):
