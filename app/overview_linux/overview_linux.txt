@@ -3,18 +3,17 @@ Q: What is System load/CPU Load?
 
  A measurement of CPU over or under-utilization in a Linux system; the
 number of processes which are being executed by the CPU or in waiting
-state. Load average =E2=80=93 is the average system load calculated over=
- a
+state. Load average – is the average system load calculated over a
 given period of time of 1, 5 and 15 minutes.
 
 
 Q: What is Main PID?
 
-Main PID is the PID of the process that is started using ExecStart=3D
+Main PID is the PID of the process that is started using ExecStart=
 options (in the example sshd). The Process: is used for any other
 process that might have been started by the service using
 ExecStartPre, ExecStartPost, ExecStopPost, etc options. (in this
-example, sshd-keygen has been started using the ExecStartPre=3Doption).
+example, sshd-keygen has been started using the ExecStartPre=option).
 You can have multiple lines on Process: if there are more than one
 processes started by the service, other than the main process. If
 there is no other process involved, you will only see the Main PID
@@ -22,7 +21,7 @@ value.
 
 I admit this is not very clear in the docs for ExecStartPre but the
 doc for ExecStartclarifies that the main process is the one started by
-that option, except for Type=3Dforking, in which case, the daemon
+that option, except for Type=forking, in which case, the daemon
 process is considered the main process.
 
 
@@ -54,7 +53,7 @@ for the user's login directory. The default is to append the LOGIN
 Q:  Create a shell script to add a path.
 
 if ! echo ${PATH} | grep -q /opt/jdk1.8.0_111/bin ; then
-   export PATH=3D/opt/jdk1.8.0_111/bin:${PATH}
+   export PATH=/opt/jdk1.8.0_111/bin:${PATH}
 fi
 
 
@@ -84,8 +83,7 @@ Q: What is Apache Tomcat?
 Apache Tomcat (or simply Tomcat) is an open source web server and
 servlet container developed by the Apache Software Foundation (ASF).
 Tomcat implements the Java Servlet and the JavaServer Pages ( JSP )
-specifications from Oracle Corporation, and provides a =E2=80=9Cpure Jav=
-a=E2=80=9D
+specifications from Oracle Corporation, and provides a “pure Java”
 HTTP web server environment for Java code to run.
 
 
@@ -211,18 +209,17 @@ Q: How do you modify kernel parameters?
 # vim /proc or /proc/sys/*
    OR
 # vim /etc/sysctl.conf OR /etc/sysctl.d/99-example.conf
-# sysctl =E2=80=93p    ### To update.
-# sysctl =E2=80=93a    ### To check & confirm.
+# sysctl –p    ### To update.
+# sysctl –a    ### To check & confirm.
 
 
 Q: How do you Enable IP Forwarding?
 
-$ echo "net.ipv4.ip_forward =3D 1"|sudo tee /etc/sysctl.d/99-ipforward.c=
-onf
-net.ipv4.ip_forward =3D 1
+$ echo "net.ipv4.ip_forward = 1"|sudo tee /etc/sysctl.d/99-ipforward.conf
+net.ipv4.ip_forward = 1
 
 $ sudo sysctl -p /etc/sysctl.d/99-ipforward.conf
-net.ipv4.ip_forward =3D 1
+net.ipv4.ip_forward = 1
 
 
 Q: What is the NFS server config file & contents
@@ -335,7 +332,7 @@ Q: How do you check network port usage?
    netstat
           -a  (port usage)
           -l   (listeningPorts)
-          -n  (I.P.=E2=80=99s)
+          -n  (I.P.’s)
           -p  (processes)
           -r   (routingTable)
           -i   (interface~errors)
@@ -344,7 +341,7 @@ Q: How do you check network port usage?
 
 Q: How would you perform a Network Throughput Test?
 
-ftp> put "|dd if=3D/dev/zero bs=3D1024k count=3D1024" /dev/null
+ftp> put "|dd if=/dev/zero bs=1024k count=1024" /dev/null
 
 
 Q: How can you check to see when the server last rebooted?
@@ -375,7 +372,7 @@ Q: How do you check SWAP space? 3 ways...
 
    Q: How do you create a SWAP space file?
 
-  # dd if=3D/dev/zero of=3D/swap bs=3D1024k count=3D1024
+  # dd if=/dev/zero of=/swap bs=1024k count=1024
 
   # mkswap /swap
   # swapon /swap
@@ -486,11 +483,11 @@ Q: Where is the filesystem table stored?
 # vi /etc/fstab
 /dev/sda4 /xen ext4 defaults 1 1
 Dump Value: 0 or 1
-   0 =3D Ignore.
-   1 =3D Back it up.
+   0 = Ignore.
+   1 = Back it up.
 Filesystem Check Order:
-   0 =3D Ignore.
-   1 =3D Check Filesystem
+   0 = Ignore.
+   1 = Check Filesystem
 
 # mount -a
 
@@ -522,10 +519,10 @@ CPU
 MEMORY
  -/proc/meminfo
  -/proc/swaps
- =C3=B7/proc/sys/vm/drop_caches
+ ÷/proc/sys/vm/drop_caches
 
 DISK
- =C3=B7/proc/filesystems
+ ÷/proc/filesystems
  -/proc/mdstat
  -/proc/mounts
  -/proc/partitions
@@ -534,7 +531,7 @@ PROCESSES
 1 2 3 15681 8903 5932
 
 NETWORKING
- =C3=B7/proc/net/bonding/bond0
+ ÷/proc/net/bonding/bond0
 
 
 Q: Tell me something about ext2?
@@ -594,7 +591,7 @@ Administers /etc/group and /etc/gshadow
 
 Q: What is umask?
 
-   =E2=80=98User file creation mask'
+   ‘User file creation mask'
 
 
 Q: What is the umask default?
@@ -605,8 +602,7 @@ Q: What is the umask default?
 Q: What is repquota?
 
 View user disk usage and quotas for file systems.
-A user=E2=80=99s quotas and number of files and amount of space (in kilo=
-bytes)
+A user’s quotas and number of files and amount of space (in kilobytes)
 is printed
 
  Acronym:
@@ -633,14 +629,14 @@ defaults,usrquota,grpquota        1 2
 
 # mount | grep /data3
 /dev/mapper/vg01-data3 on /data3 type ext4
-(rw,relatime,quota,usrquota,grpquota,data=3Dordered)
+(rw,relatime,quota,usrquota,grpquota,data=ordered)
 
 
 Q: How do you create Quota Database Files?
 
 # quotacheck -cugv /data3
 
--c : create quota file and don=E2=80=99t use the existing file
+-c : create quota file and don’t use the existing file
 -v : verbose output
 -u : user disk quota
 -g : group disk quota
@@ -771,8 +767,7 @@ Q: (SAR) How can you check the CPU usage of ALL CPUs?
    # sar -u
 
 
-Q: (SAR) How can you display real time CPU usage every 1 second for 3
-times.
+Q: (SAR) How can you display real time CPU usage every 1 second for 3 times.
 
    # sar -u 1 3
 
@@ -789,8 +784,7 @@ from the sa10 file.
    # sar -u -f /var/log/sa/sa10
 
 
-Q: (SAR) How can you check the CPU usage of Individual CPU? (Multi-core
-CPUs)
+Q: (SAR) How can you check the CPU usage of Individual CPU? (Multi-core CPUs)
 
    # sar -P ALL
 
@@ -875,18 +869,15 @@ Q: CRON - How do you run a command at 6:30 PM.
 
 Q: How do you specify an editor to open crontabs?
 
-   # export EDITOR=3Dvi
+   # export EDITOR=vi
 
 
-Q: How do you edit crontab file, or create one if it doesn=E2=80=99t alr=
-eady
-exist?
+Q: How do you edit crontab file, or create one if it doesn’t already exist?
 
    # crontab -e
 
 
-Q: How do you get a crontab list of cronjobs or display crontab file
-contents?
+Q: How do you get a crontab list of cronjobs or display crontab file contents?
 
    # crontab -l
 
@@ -937,8 +928,7 @@ Q: How do you generate a cron log file for a user?
 
    To collect the cron execution execution log in a file :
 
-30 18 * * * rm /home/someuser/tmp/* >>
-/home/someuser/cronlogs/clean_tmp_dir.log
+30 18 * * * rm /home/someuser/tmp/* >> /home/someuser/cronlogs/clean_tmp_dir.log
 
 
 
@@ -951,8 +941,7 @@ Kernel             - /boot/vmlinuz*
 
 Logging            - /var/log/messages
 
-Networking         - /etc/sysconfig/network & network-scripts/ifcfg-ens3=
-3
+Networking         - /etc/sysconfig/network & network-scripts/ifcfg-ens33
 
 Kernel Parameters  - /etc/sysctl.conf or /etc/sysctl.d/*
 
@@ -1047,8 +1036,7 @@ Q: How do you display the ARP table?
 Q: How do you clear the ARP table?
 
 # ip -s -s neigh flush all
-      =E2=80=9C-s, -stats, -statistics=E2=80=9D =3D> Output more informa=
-tion.
+      “-s, -stats, -statistics” => Output more information.
          If the option appears twice or more, the amount of
 information increases.
 # arp -n
@@ -1077,8 +1065,7 @@ Q: How do you Delete eth0?
 
 Q: What is the difference between raid 01 and raid 10?
 
-   RAID 0+1 (RAID 01) is =E2=80=9Cmirror of stripes=E2=80=9D.  The disks=
- within the
+   RAID 0+1 (RAID 01) is “mirror of stripes”.  The disks within the
 groups are striped and the groups are mirrored.
 
    RAID 1+0 (RAID 10) is a "stripe of mirrors".   The disks within the
@@ -1089,8 +1076,8 @@ group are mirrored and the groups themselves ar7e striped.
 
 # mdadm
  --create /dev/md0
- --level=3D{linear;stripe;mirror;5;6;10}
- --raid-disks=3D6
+ --level={linear;stripe;mirror;5;6;10}
+ --raid-disks=6
  /dev/sda /dev/sdb /dev/sdc /dev/sdd /dev/sde /dev/sdf
 
 
@@ -1139,8 +1126,7 @@ Q: What command/system call can you use to get Inode information?
 
    stat: Getting inode information
 
-   stat() is a Unix system call that returns useful data about a file
-inode.
+   stat() is a Unix system call that returns useful data about a file inode.
 
    Example:
 # stat /tmp/test123.txt
@@ -1173,8 +1159,7 @@ Waiting : The process is waiting for an event or for a resource.
 
 Stopped : The process has been stopped, usually by receiving a signal.
 
-Zombie : The process is dead but have not been removed from the process
-table.
+Zombie : The process is dead but have not been removed from the process table.
 
 
 Q: What are the process states in Unix via the ps aux|-elf BSD Format?
@@ -1190,7 +1175,7 @@ Z defunct ("zombie") process, terminated but not reaped by its parent
 
 Q: What is a Zombie process?
 
-   Zombie =3D When a program forks and the child finishes before the
+   Zombie = When a program forks and the child finishes before the
 parent, the kernel still keeps some of its information about the child
 in case the parent might need it - for example, the parent may need to
 check the child's exit status. To be able to get this information, the
@@ -1200,7 +1185,7 @@ and the parent calling `wait()', the child is said to be a `zombie'.
 (If you do `ps', the child will have a `Z' in its status field to
 indicate this.)
 
-Finding Zombies =3D> ps aux | grep -w Z
+Finding Zombies => ps aux | grep -w Z
 
 
 Q: How can you create and test for a Zombie process?
@@ -1215,7 +1200,7 @@ int main ()
 {
   pid_t child_pid;
 
-  child_pid =3D fork ();
+  child_pid = fork ();
   if (child_pid > 0) {
     sleep (60);
   }
@@ -1237,7 +1222,7 @@ root      9662  0.0  0.0      0     0 pts/0    Z+   21:29   0:00
 
 Q: What is a Orphan process?
 
-   Orphan =3D An orphan process is a computer process whose parent
+   Orphan = An orphan process is a computer process whose parent
 process has finished or terminated, though itself remains running.
 
 In a Unix-like operating system any orphaned process will be
@@ -1250,10 +1235,10 @@ created it no longer exists.
 
 Q: How do you find Orphan process?
 
-# ps -elf | awk '{if ($5 =3D=3D 1){print $4" "$5" "$15}}'
+# ps -elf | awk '{if ($5 == 1){print $4" "$5" "$15}}'
 
 
-Q: What does the =E2=80=9Ccksum=E2=80=9D command do?
+Q: What does the “cksum” command do?
 
 cksum - checksum and count the bytes in a file
 
@@ -1279,7 +1264,7 @@ bzip2, bunzip2 - a block-sorting file compressor
 
 Q: What are UNIX System calls for a File?
 
-   =E2=80=A2 System calls for low level file I/O:
+   • System calls for low level file I/O:
 create
 open
 close
@@ -1291,7 +1276,7 @@ unlink
 
 Q: What are UNIX System calls for a process?
 
-   =E2=80=A2 System Calls for process control
+   • System Calls for process control
 exec
 fork
 wait
@@ -1302,14 +1287,14 @@ kill
 
 Q: What are UNIX System calls for IPC?
 
-   =E2=80=A2 System Calls for IPC
+   • System Calls for IPC
 dup
 pipe
 
 
 Q: What are UNIX System calls for Networking?
 
-   =E2=80=A2 Networking/Socket System calls:
+   • Networking/Socket System calls:
 socket
 bind
 listen
@@ -1321,38 +1306,31 @@ send
 receive
 
 
-=E2=80=A2 * Socket - The socket system call creates a new socket by assi=
-gning
+• * Socket - The socket system call creates a new socket by assigning
 a new descriptor.
 
-=E2=80=A2 * Bind - The bind system call associates a local network trans=
-port
+• * Bind - The bind system call associates a local network transport
 address with a socket
 
-=E2=80=A2 * Listen - This call indicates that the server process is read=
-y to
+• * Listen - This call indicates that the server process is ready to
 accept any new incoming connections
 
-=E2=80=A2 * Accept - The accept system call is a blocking call that wait=
-s for
+• * Accept - The accept system call is a blocking call that waits for
 incoming connections.
 
-=E2=80=A2 * Connect - The connect system call is normally called by the =
-client
+• * Connect - The connect system call is normally called by the client
 process to connect to the server process.
 
-=E2=80=A2 * Shutdown - The shutdown system call closes either one or bot=
-h ends
+• * Shutdown - The shutdown system call closes either one or both ends
 of the connection.
 
-=E2=80=A2 * Close - The close system call closes or aborts any pending
+• * Close - The close system call closes or aborts any pending
 connections on the socket.
 
-=E2=80=A2 * Send - There are four system calls to send data on the n/w
+• * Send - There are four system calls to send data on the n/w
 interface: write, writev, sendto, and sendmsg.
 
-=E2=80=A2 * Receive - There are 4 system calls that can be used to recei=
-ve
+• * Receive - There are 4 system calls that can be used to receive
 data from a connection: read, readv, recvfrom, and recvmsg.
 
 
@@ -1404,7 +1382,7 @@ True if file exists and is a regular file.
 -g file
 True if file exists and is set-group-id.
 
--h file {also =E2=80=93L}
+-h file {also –L}
 True if file exists and is a symbolic link.
 
 -k file
@@ -1450,10 +1428,10 @@ The length of STRING is greater than zero.
 -z STRING
 The length of STRING is zero.
 
-STRING1 =3D STRING2
+STRING1 = STRING2
 STRING1 is equal to STRING2
 
-STRING1 !=3D STRING2
+STRING1 != STRING2
 STRING1 is not equal to STRING2
 
 INTEGER1 -eq INTEGER2
@@ -1467,8 +1445,7 @@ INTEGER1 is numerically less than INTEGER2
 
 
 
-Q: What is a script that can check for the existence of the messages fil=
-e?
+Q: What is a script that can check for the existence of the messages file?
 
    Sample Script:
 # vim file_check.sh
@@ -1567,7 +1544,7 @@ Q: How do you find out what services does this package require?
 # rpm -q --requires package
 
 
-Q: How do you clean up yum=E2=80=99s cache, packages, headers, metadata,
+Q: How do you clean up yum’s cache, packages, headers, metadata,
 dbcache, rpmdb & plugins?
 
 # yum clean all
@@ -1580,12 +1557,11 @@ Q: How do you list YUM Repos?
 
 Q: How do you YUM Download RPMs without installing them?
 
-# yum -y install --downloadonly --downloaddir=3D/data/rpms glibc glibc2
-libgcc
+# yum -y install --downloadonly --downloaddir=/data/rpms glibc glibc2 libgcc
 
        OR
 
-# yumdownloader --resolve --downloadonly --downloaddir=3D/data/rpms
+# yumdownloader --resolve --downloadonly --downloaddir=/data/rpms
 glibc glibc2 libgcc
 
 
@@ -1777,10 +1753,9 @@ IMAP over SSL
 
 Q: How do you create an SSL Tunnel?
 
-# ssh -L 8888:smf1-afk-15-sr4.prod.tw.com:31567 nest1.corp.twitter.com -=
-N
+# ssh -L 8888:smf1-afk-15-sr4.prod.tw.com:31567 nest1.corp.twitter.com -N
 
-  Then go to the website =E2=80=A6
+  Then go to the website …
     Ex: http://127.0.0.1:8888/
 
    OR
@@ -1789,9 +1764,9 @@ Socket Secure (SOCKS)
 
 # ssh -D 8080 user1@nest1.corp.twitter.com
 
-Network =3D> Advanced =3D> SOCKS Proxy =3D> 127.0.0.1:8080
+Network => Advanced => SOCKS Proxy => 127.0.0.1:8080
 
-  Then go to the website =E2=80=A6
+  Then go to the website …
     Ex: http://smf1-afk-15-sr4.prod.tw.com:31567/
 
 
@@ -1806,12 +1781,12 @@ Q: What are the Private Address Spaces
 
 Q: What are the Network Number Address Ranges?
 
-A =3D 1   =E2=80=93 126 N.H.H.H     16,777,216 addresses
-L =3D 127
-B =3D 128 =E2=80=93 191 N.N.H.H         65,536 addresses
-C =3D 192 =E2=80=93 223 N.N.N.H            255 addresses
-D =3D 224 =E2=80=93 239 Reserved for Multicasting
-E =3D 240 - 254 Experimental; Used for research
+A = 1   – 126 N.H.H.H     16,777,216 addresses
+L = 127
+B = 128 – 191 N.N.H.H         65,536 addresses
+C = 192 – 223 N.N.N.H            255 addresses
+D = 224 – 239 Reserved for Multicasting
+E = 240 - 254 Experimental; Used for research
 
 
 Q: Where is the user-specific SSH configuration information stored?
@@ -1882,12 +1857,12 @@ Q: How do you sync filesystems?
 Use rsync.
 # rsync [OPTIONS] [SRC] [DEST]
 -v : verbose
--r : copies data recursively (don=E2=80=99t preserve inode data)
+-r : copies data recursively (don’t preserve inode data)
 -a : archive mode: copy files recursively, preserve inode data.
 -z : compress file data
 -h : human-readable, output numbers in a human-readable format
 -e : specify the remote shell to use
---bwlimit=3DKBPS          limit I/O bandwidth; KBytes per second
+--bwlimit=KBPS          limit I/O bandwidth; KBytes per second
 
 # rsync -zvh backup.tar /tmp/backups/
 # rsync -avzh /root/rpmpkgs /tmp/backups/
@@ -1895,13 +1870,12 @@ Use rsync.
 # rsync -avzh root@192.168.0.100:/home/rgriffith/rpmpkgs /tmp/myrpms
 # rsync -avzhe ssh root@192.168.0.100:/root/install.log /tmp/
 # rsync -avzhe ssh backup.tar root@192.168.0.100:/backups/
-# rsync -avzhe ssh --progress /home/rpmpkgs root@192.168.0.100:
-/root/rpmpkgs
+# rsync -avzhe ssh --progress /home/rpmpkgs root@192.168.0.100:/root/rpmpkgs
 # rsync -avze ssh --include 'R*' --exclude '*'
 root@192.168.0.101:/var/lib/rpm/ /root/rpm
-# rsync -avzhe ssh --max-size=3D'200k' /var/lib/rpm/
+# rsync -avzhe ssh --max-size='200k' /var/lib/rpm/
 root@192.168.0.100:/root/tmprpm
-# rsync --bwlimit=3D100 -avzhe ssh  /var/lib/rpm/
+# rsync --bwlimit=100 -avzhe ssh  /var/lib/rpm/
 root@192.168.0.100:/root/tmprpm/
 
    *** CAREFUL***   Deletes files on target if not on source.
@@ -1919,18 +1893,13 @@ inode & across filesystems.
 
 - Hard Link: link to physical file
    More than one filename reference the same inode number.
-   Hard links must reside on the same filesystem as the real/source file=
-.
+   Hard links must reside on the same filesystem as the real/source file.
    The real/source file must exist.
 
 - Soft Link: link to path
-   Special file (with unique inode) is created that points to real/sourc=
-e
-file.
-   Special file is called 'soft link' or a 'symbolic link' (aka a
-'symlink').
-   Soft links can reside on separate filesystems than the real/source
-file.
+   Special file (with unique inode) is created that points to real/source file.
+   Special file is called 'soft link' or a 'symbolic link' (aka a 'symlink').
+   Soft links can reside on separate filesystems than the real/source file.
    The real/source file does not have to exist.
    Additional I/O necessary to complete file access.
    Additional storage taken up by Soft Link's file data.
@@ -1948,8 +1917,7 @@ translate or delete characters
 Example: # tr -d '\177' <file
 
 
-Q: What tools can you use to clean up files with bad/mystery characters
-in it?
+Q: What tools can you use to clean up files with bad/mystery characters in it?
 
 dos2unix, cat -v, od -c
 
@@ -1999,8 +1967,7 @@ host # od -c file
 0000007
 
 
-    Example 4: od does not recognize and can not translate ASCII
-character.
+    Example 4: od does not recognize and can not translate ASCII character.
    ----------
 host # cat file
 bcdef
@@ -2111,8 +2078,7 @@ Q: What is 2>&1?
 Redirect Standard Error to Standard Output.
 
 
-Q: How can you send standard error to file but have standard output rema=
-in
+Q: How can you send standard error to file but have standard output remain
 the same to the screen?
 
 # cmd 2>file
@@ -2123,14 +2089,12 @@ Q: How can you send both standard error and standard output to file?
 # cmd > file 2>&1
 
 
-Q: How can you send standard output to file f1, standard error to file f=
-2?
+Q: How can you send standard output to file f1, standard error to file f2?
 
 # cmd > f1 2>f2
 
 
-Q: How can you send output of cmd to standard output (terminal) and to
-files?
+Q: How can you send output of cmd to standard output (terminal) and to files?
 
 # cmd | tee files
 
@@ -2191,8 +2155,7 @@ Q: How can you do the above modifying the file in place?
 # sed -i 's/rgriffith/Robert Griffith/g' file
 
 
-Q: How can you do the above modifying the file in place with a backup
-file?
+Q: How can you do the above modifying the file in place with a backup file?
 
 # sed -i.bak 's/rgriffith/Robert Griffith/g' file
 
@@ -2221,7 +2184,7 @@ BIOS
 MBR
 GRUB/LILO
 KERNEL
-INIT/TARGETS  (legacy =3D> SysVinit) (Upstart {/etc/event.d/})
+INIT/TARGETS  (legacy => SysVinit) (Upstart {/etc/event.d/})
 RUNLEVEL
 
 
@@ -2280,7 +2243,7 @@ Q: How do you mount a filesystem?
 
 Q: In VIM, how do you change the shiftwidth setting?
 
-:set shiftwidth=3D2
+:set shiftwidth=2
 
 
 Q: In VIM, how do you shift 3 lines of code to the right?
@@ -2340,13 +2303,11 @@ Filter
 
 Q: What are Python's logging config options?
 
-
-logging.basicConfig(format=3D'%(asctime)s:%(levelname)s:%(module)s:%(fun=
-cName)s:%(message)s=E2=80=99,
-                    filename=3D'example.log',
-                    filemode=3D'w',
-                    datefmt=3D'%m/%d/%Y %I:%M:%S %p=E2=80=99,
-                    level=3Dlogging.DEBUG)
+logging.basicConfig(format='%(asctime)s:%(levelname)s:%(module)s:%(funcName)s:%(message)s’,
+                    filename='example.log',
+                    filemode='w',
+                    datefmt='%m/%d/%Y %I:%M:%S %p’,
+                    level=logging.DEBUG)
 
 
 Q: Where can you write Python log messages to?
@@ -2379,12 +2340,12 @@ Q: What are the Network Bonding Modes?
 
 Q: What are some Network Bonding options?
 
-   mode=3D[0-6]
-   primary=3Deth0
-   miimon=3D100
-   downdelay=3D500
-   updelay=3D500
-   xmit-hash-policy=3Dlayer2
+   mode=[0-6]
+   primary=eth0
+   miimon=100
+   downdelay=500
+   updelay=500
+   xmit-hash-policy=layer2
 
 
 Q: What are the fields of /etc/passwd?
@@ -2403,8 +2364,8 @@ Q: What are the fields of /etc/shadow?
 username
 password
 last changed (since Epoch)
-min password change. 0 =3D> anytime
-max password change. 9999 =3D> keep for years
+min password change. 0 => anytime
+max password change. 9999 => keep for years
 warn of expiring password
 inactive . . . disable. (days after expire)
 days disabled. (since Epoch)
@@ -2426,7 +2387,7 @@ Number of days of warning before password expires : 7
 chage username
 
 
-   Q: How do you change the =E2=80=A6
+   Q: How do you change the …
 explicit expiration date
 
   (-E) to 01/31/2012,
@@ -2476,7 +2437,7 @@ mod_ssl
 mod_status
 
 
-Q: What is Apache=E2=80=99s DocumentRoot?
+Q: What is Apache’s DocumentRoot?
 
 /var/www/html
 
@@ -2510,16 +2471,14 @@ watchfor directives.
 watchfor /success|accepted|rgriffith/
          echo
          write robrg
-         mail addresses=3Drobrg\@localhost, subject=3DSuccessful Activit=
-y
+         mail addresses=robrg\@localhost, subject=Successful Activity
 +++
 
-# /usr/bin/swatch --daemon --config-file=3D/etc/swatch.conf
---tail-file=3D/var/log/messages --pid-file=3D/var/run/swatch.pid
+# /usr/bin/swatch --daemon --config-file=/etc/swatch.conf
+--tail-file=/var/log/messages --pid-file=/var/run/swatch.pid
 
 ### NOTE: The above will watch /var/log/messages for messages
-containing =E2=80=9Csuccess or accepted or rgriffith=E2=80=9D.  If found=
-, it will
+containing “success or accepted or rgriffith”.  If found, it will
 email robrg the message.
 
 
@@ -2536,8 +2495,7 @@ Q:  What is set in /etc/security/limits.conf?
 #        - fsize - maximum filesize (KB)
 #        - maxlogins - max number of logins for this user
 #        - maxsyslogins - max number of logins on the system
-#        - nice - max nice priority allowed to raise to values: [-20, 19=
-]
+#        - nice - max nice priority allowed to raise to values: [-20, 19]
 #        - nofile - max number of open file descriptors
 #        - nproc - max number of processes
 
@@ -2560,22 +2518,19 @@ Q: Write a pre-commit hook.
 
 
 #!/bin/sh
-files=3D$(git diff =E2=80=93cached =E2=80=93name-only =E2=80=93diff-filt=
-er=3DACM | grep =E2=80=98.go$=E2=80=99)
+files=$(git diff –cached –name-only –diff-filter=ACM | grep ‘.go$’)
 if [ -z files ]; then
 exit 0
 fi
-unfmtd=3D$(gofmt -l $files)
+unfmtd=$(gofmt -l $files)
 if [ -z unfmtd ]; then
 exit 0
 fi
-echo =E2=80=9CSome .go files are not fmt=E2=80=99d=E2=80=9D
+echo “Some .go files are not fmt’d”
 exit 1
 
 
-Q: How can you tell what kind of system you are on =E2=80=A6 System V, U=
-pstart,
-Systemd?
+Q: How can you tell what kind of system you are on … System V, Upstart, Systemd?
 
 /usr/lib/systemd tells you you're on a systemd based system.
 
@@ -2636,23 +2591,22 @@ network/web attacks?
 Q: How do you rename files from us.data to un.data?
 
 for i in *.data;
-do a=3D"$(echo $i | sed s/us/un/)";
+do a="$(echo $i | sed s/us/un/)";
 mv "$i" "$a";
 done
 
 
 Q: How do you insert text at the front of filenames?
 
-   for i in `ls`; do a=3Dcalmem1-"$i"; mv "$i" "$a"; done
+   for i in `ls`; do a=calmem1-"$i"; mv "$i" "$a"; done
 
 
 Q: How do you remove whitespace from filenames?
 
-   # for i in *; do a=3D"${i// /_}";  mv "$i" "$a"; done
+   # for i in *; do a="${i// /_}";  mv "$i" "$a"; done
 
 NOTE:
-*\ * selects all files with a space in their name as input for the the
-for loop.
+*\ * selects all files with a space in their name as input for the the for loop.
 
 The quotes around "$f" are important because we know there's a space
 in the filename and otherwise it would appear as 2+ arguments to mv.
@@ -2668,7 +2622,7 @@ replaced.
 
 Q: How do you replace _-_ in filenames?
 
-   # for i in *; do a=3D"${i//_-_/_}";  mv "$i" "$a"; done
+   # for i in *; do a="${i//_-_/_}";  mv "$i" "$a"; done
 
 
 Replication:
@@ -2850,3 +2804,4 @@ directly to the host operating system.
 
 
 Q: dump/restore, tar, cpio, rsync
+
