@@ -31,6 +31,7 @@ class DebugConfig(Config):
 
 class TestConfig(Config):
     DEBUG = True
+    LOGIN_DISABLED = True
     TESTING = True
     WTF_CSRF_ENABLED = False
     SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:' 
