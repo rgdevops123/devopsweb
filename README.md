@@ -135,3 +135,11 @@
     $ pytest -v --disable-pytest-warnings
        -v                          ### Verbose
        --disable-pytest-warnings   ### Disable pytest warnings.
+
+
+### ============================================
+### Run coverage.py
+    $ coverage run --source=./app -m pytest -v --disable-pytest-warnings
+    $ coverage report
+    $ coverage html
+
