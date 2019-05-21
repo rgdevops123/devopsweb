@@ -129,3 +129,9 @@
     $ python3.6 manage.py db migrate
     $ python3.6 manage.py db upgrade
     
+
+### ============================================
+### Run Tests
+    $ pytest -v --disable-pytest-warnings
+       -v                          ### Verbose
+       --disable-pytest-warnings   ### Disable pytest warnings.

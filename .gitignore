@@ -19,6 +19,10 @@ logs
 env
 venv
 
+# vim temporary files
+*.swp
+*.swo
+
 # other
 .DS_Store
 
