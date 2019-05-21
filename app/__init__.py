@@ -71,8 +71,6 @@ def configure_logs(app):
 def create_app(config, selenium=False):
     app = Flask(__name__, static_folder='static')
     app.config.from_object(config)
-    if selenium:
-        app.config['LOGIN_DISABLED'] = True
     register_extensions(app)
     register_blueprints(app)
     register_error_handlers(app)

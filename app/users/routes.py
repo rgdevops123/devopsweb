@@ -4,14 +4,14 @@ from flask_login import current_user, login_required, login_user, logout_user
 
 from app import db
 from app import logger
-from app.models import User
+from app.models import User 
 from app.users import blueprint
 from app.users.forms import LoginForm, RegistrationForm, UpdateAccountForm, RequestResetForm, ResetPasswordForm
 from app.users.utils import send_reset_email
 
 
 @blueprint.route("/register", methods=['GET', 'POST'])
-def register():
+def register(): # pragma: no cover
     if current_user.is_authenticated:
         return redirect(url_for('home_blueprint.home'))
     form = RegistrationForm(request.form)
@@ -70,7 +70,7 @@ def logout():
     return redirect(url_for('users_blueprint.login'))
 
 
-@blueprint.route("/account", methods=['GET', 'POST'])
+@blueprint.route("/account", methods=['GET', 'POST']) # pragma: no cover
 @login_required
 def account():
     form = UpdateAccountForm()
@@ -96,7 +96,7 @@ def account():
     return render_template('account.html', form=form)
 
 
-@blueprint.route("/reset_request", methods=['GET', 'POST'])
+@blueprint.route("/reset_request", methods=['GET', 'POST']) # pragma: no cover
 def reset_request():
     if current_user.is_authenticated:
         return redirect(url_for('home_blueprint.home'))
@@ -109,7 +109,7 @@ def reset_request():
     return render_template('reset_request.html', form=form)
 
 
-@blueprint.route("/reset_password/<token>", methods=['GET', 'POST'])
+@blueprint.route("/reset_password/<token>", methods=['GET', 'POST']) # pragma: no cover
 def reset_token(token):
     if current_user.is_authenticated:
         return redirect(url_for('home_blueprint.home'))

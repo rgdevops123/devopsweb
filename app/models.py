@@ -7,7 +7,7 @@ from sqlalchemy import LargeBinary, Column, Integer, String
 from app import db, login_manager
 
 
-class User(db.Model, UserMixin):
+class User(db.Model, UserMixin): # pragma: no cover
 
     __tablename__ = 'user'
 
@@ -49,7 +49,7 @@ class User(db.Model, UserMixin):
         return str(self.username)
 
 
-@login_manager.user_loader
+@login_manager.user_loader # pragma: no cover
 def user_loader(id):
     return User.query.filter_by(id=id).first()
 
