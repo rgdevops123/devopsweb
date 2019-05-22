@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.com/rgdevops123/devopsweb.svg?branch=master)](https://travis-ci.com/rgdevops123/devopsweb)
+[![Coverage Status](https://coveralls.io/repos/github/rgdevops123/devopsweb/badge.svg?branch=master)](https://coveralls.io/github/rgdevops123/devopsweb?branch=master)
 
 # devopsweb
 ### Dev Ops Web
