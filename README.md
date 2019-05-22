@@ -92,6 +92,8 @@
 
 ### Set FLASK APP
     $ export FLASK_APP=devopsweb.py
+        OR
+    $ export FLASK_APP=/FULL_PATH_TO/devopsweb.py
 
 
 ### Run the Application
