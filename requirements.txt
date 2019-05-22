@@ -1,6 +1,7 @@
 bcrypt
 coveralls
 coverage
+flake8
 flask
 flask_login
 flask_mail
