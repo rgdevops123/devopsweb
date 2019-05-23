@@ -137,13 +137,17 @@
 
 ### ============================================
 ### Run Tests
+    $ export SQLALCHEMY_DATABASE_URI_DEBUG='sqlite:////tmp/testdatabase.db'
     $ pytest -v --disable-pytest-warnings
        -v                          ### Verbose
        --disable-pytest-warnings   ### Disable pytest warnings.
 
+    $ pytest -k unittests
+       -k <substring>              ### Only run tests with substring. 
 
 ### ============================================
 ### Run coverage.py testing 123
+    $ export SQLALCHEMY_DATABASE_URI_DEBUG='sqlite:////tmp/testdatabase.db'
     $ coverage run --source=./app -m pytest -v --disable-pytest-warnings
     $ coverage report
     $ coverage html

@@ -3,7 +3,7 @@ from flask_mail import Message
 from app import mail
 
 
-def send_reset_email(user): # pragma: no cover
+def send_reset_email(user):
     token = user.get_reset_token()
     msg = Message('Password Reset Request',
                   sender='noreply@demo.com',
