@@ -1,7 +1,6 @@
-from flask import url_for
 from flask_login import current_user
 from flask_testing import TestCase
-from bcrypt import checkpw, gensalt, hashpw
+from bcrypt import gensalt, hashpw
 
 from config import config_dict
 from app import create_app, db
@@ -25,13 +24,17 @@ class BaseTestCase(TestCase):
     def setUp(self):
         db.create_all()
 
-        username = "admin"
-        email = "admin@test.com"
-        password = "admin"
+        password = "123"
         hashed_password = hashpw(password.encode('utf8'), gensalt())
-        user = User(username=username, email=email, password=hashed_password)
+        admin = User(username="admin",
+                     email="admin@test.com",
+                     password=hashed_password)
+        testuser = User(username="testuser1",
+                        email="testuser1@test.com",
+                        password=hashed_password)
 
-        db.session.add(user)
+        db.session.add(admin)
+        db.session.add(testuser)
         db.session.commit()
 
     def tearDown(self):
@@ -55,7 +58,7 @@ class FlaskTestCase(BaseTestCase):
     def test_home_page(self):
         response = self.client.post(
             '/login',
-            data=dict(email="admin@test.com", password="admin"),
+            data=dict(email="admin@test.com", password="123"),
             follow_redirects=True)
         self.assertIn(b'System Configuration', response.data)
 
@@ -64,7 +67,7 @@ class FlaskTestCase(BaseTestCase):
         with self.client:
             response = self.client.post(
                 '/login',
-                data=dict(email="admin@test.com", password="admin"),
+                data=dict(email="admin@test.com", password="123"),
                 follow_redirects=True)
             response = self.client.get('/login', follow_redirects=True)
             self.assertEqual(response.status_code, 200)
@@ -75,8 +78,8 @@ class FlaskTestCase(BaseTestCase):
     def test_register_page(self):
         response = self.client.post(
             '/register',
-            data=dict(username='testuser1',
-                      email="testuser1@test.com",
+            data=dict(username='testuser2',
+                      email="testuser2@test.com",
                       password="123",
                       confirm_password='123'),
             follow_redirects=True)
@@ -88,7 +91,7 @@ class FlaskTestCase(BaseTestCase):
         response = self.client.post(
             '/register',
             data=dict(username='admin',
-                      email="testuser1@test.com",
+                      email="testuser3@test.com",
                       password="123",
                       confirm_password='123'),
             follow_redirects=True)
@@ -99,7 +102,7 @@ class FlaskTestCase(BaseTestCase):
     def test_register_page_with_taken_email(self):
         response = self.client.post(
             '/register',
-            data=dict(username='testuser1',
+            data=dict(username='testuser3',
                       email="admin@test.com",
                       password="123",
                       confirm_password='123'),
@@ -112,7 +115,7 @@ class FlaskTestCase(BaseTestCase):
         with self.client:
             response = self.client.post(
                 '/login',
-                data=dict(email="admin@test.com", password="admin"),
+                data=dict(email="admin@test.com", password="123"),
                 follow_redirects=True)
             response = self.client.get('/register', follow_redirects=True)
             self.assertEqual(response.status_code, 200)
@@ -124,7 +127,7 @@ class FlaskTestCase(BaseTestCase):
         with self.client:
             response = self.client.post(
                 '/login',
-                data=dict(email="admin@test.com", password="admin"),
+                data=dict(email="admin@test.com", password="123"),
                 follow_redirects=True)
             response = self.client.get('/account')
             self.assertEqual(response.status_code, 200)
@@ -136,7 +139,7 @@ class FlaskTestCase(BaseTestCase):
         with self.client:
             response = self.client.post(
                 '/login',
-                data=dict(email="admin@test.com", password="admin"),
+                data=dict(email="admin@test.com", password="123"),
                 follow_redirects=True)
             response = self.client.post(
                 '/account',
@@ -156,7 +159,17 @@ class FlaskTestCase(BaseTestCase):
                 data=dict(email="admin@test.com"),
                 follow_redirects=True)
             self.assertEqual(response.status_code, 200)
-            self.assertIn(b'An email has been sent with instructions to reset your password.', response.data)
+            self.assertIn(b'Email sent with instructions', response.data)
+
+   # Ensure that the reset request page works correctly with bad account.
+    def test_reset_request_page_with_bad_account(self):
+        with self.client:
+            response = self.client.post(
+                '/reset_request',
+                data=dict(email="admin10@test.com"),
+                follow_redirects=True)
+            self.assertEqual(response.status_code, 200)
+            self.assertIn(b'Account does not exist.', response.data)
 
     # Ensure that the reset password page works correctly.
     def test_reset_password_page(self):
@@ -165,7 +178,7 @@ class FlaskTestCase(BaseTestCase):
                 '/reset_password/123',
                 follow_redirects=True)
             self.assertEqual(response.status_code, 200)
-            self.assertIn(b'That is an invalid or expired token!', response.data)
+            self.assertIn(b'invalid or expired token', response.data)
 
 
 if __name__ == '__main__':

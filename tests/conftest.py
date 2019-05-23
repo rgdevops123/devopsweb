@@ -1,10 +1,6 @@
-from bcrypt import checkpw, gensalt, hashpw
+from bcrypt import gensalt, hashpw
 from config import config_dict
 from pytest import fixture
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from threading import Thread
-from time import sleep
 from app import create_app, db
 from app.models import User
 
@@ -24,7 +20,9 @@ def init_database():
     db.create_all()
     password = '123'
     hashed_password = hashpw(password.encode('utf8'), gensalt())
-    user = User(username='testuser', email='testuser@email.com', password=hashed_password)
+    user = User(username='testuser',
+                email='testuser@email.com',
+                password=hashed_password)
     db.session.add(user)
     db.session.commit()
     yield db

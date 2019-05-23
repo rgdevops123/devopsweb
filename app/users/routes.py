@@ -1,12 +1,16 @@
 from bcrypt import checkpw, gensalt, hashpw
-from flask import flash, redirect, render_template, request, url_for, Blueprint
+from flask import flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_required, login_user, logout_user
 
 from app import db
 from app import logger
-from app.models import User 
+from app.models import User
 from app.users import blueprint
-from app.users.forms import LoginForm, RegistrationForm, UpdateAccountForm, RequestResetForm, ResetPasswordForm
+from app.users.forms import (LoginForm,
+                             RegistrationForm,
+                             RequestResetForm,
+                             ResetPasswordForm,
+                             UpdateAccountForm)
 from app.users.utils import send_reset_email
 
 
@@ -24,10 +28,14 @@ def register():
 
         if User.is_user_name_taken(username):
             flash('Username is already in use.', 'danger')
-            return render_template('register.html', title='Register', form=form)
+            return render_template('register.html',
+                                   title='Register',
+                                   form=form)
         if User.is_email_taken(email):
             flash('Email is already in use.', 'danger')
-            return render_template('register.html', title='Register', form=form)
+            return render_template('register.html',
+                                   title='Register',
+                                   form=form)
 
         if request:
 
@@ -35,8 +43,8 @@ def register():
                 db.session.add(user)
                 db.session.commit()
             except Exception as e:
-                logger.debug("Attempted to add user {} into Database.".format(user))
-                logger.debug("ERROR {}.".format(e)) 
+                logger.debug("ERROR: Adding user {}.".format(user))
+                logger.debug("ERROR {}.".format(e))
             else:
                 flash('Your account has been created!', 'success')
                 logger.debug("Created user {} in Database.".format(user))
@@ -56,7 +64,7 @@ def login():
         user = User.query.filter_by(email=email).first()
         if user and checkpw(password.encode('utf8'), user.password):
             login_user(user)
-            logger.debug("Logging in {}.".format(user)) 
+            logger.debug("Logging in {}.".format(user))
             return redirect(url_for('home_blueprint.home'))
         else:
             return render_template('403.html')
@@ -65,7 +73,7 @@ def login():
 
 @blueprint.route("/logout", methods=['GET', 'POST'])
 def logout():
-    logger.debug("Logging out {}.".format(current_user)) 
+    logger.debug("Logging out {}.".format(current_user))
     logout_user()
     return redirect(url_for('users_blueprint.login'))
 
@@ -82,11 +90,11 @@ def account():
         try:
             db.session.commit()
         except Exception as e:
-            logger.debug("Attempted to update account info for user {} in Database.".format(current_user))
+            logger.debug("Error: {} Account Info Update ".format(current_user))
             logger.debug("ERROR {}.".format(e))
         else:
             flash('Your account has been updated!', 'success')
-            logger.debug("Updated account info for user {} in Database.".format(current_user))
+            logger.debug("Updated account: {}.".format(current_user))
             return redirect(url_for('users_blueprint.account'))
 
     elif request.method == 'GET':
@@ -104,7 +112,7 @@ def reset_request():
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         send_reset_email(user)
-        flash('An email has been sent with instructions to reset your password.', 'info')
+        flash('Email sent with instructions to reset your password.', 'info')
         return redirect(url_for('users_blueprint.login'))
     return render_template('reset_request.html', form=form)
 
@@ -126,13 +134,13 @@ def reset_token(token):
         try:
             db.session.commit()
         except Exception as e:
-            logger.debug("Attempted to update password for user {} in Database.".format(user))
-            logger.debug("ERROR {}.".format(e))        
+            logger.debug("Attempted to update password for {}.".format(user))
+            logger.debug("ERROR {}.".format(e))
         else:
-            flash('Your password has been updated! You are now able to log in', 'success')
-            logger.debug("Updated password for user {} in Database.".format(user))
+            flash('Your password has been updated!', 'success')
+            logger.debug("Updated password for user {}.".format(user))
             return redirect(url_for('users_blueprint.login'))
 
-    return render_template('reset_token.html', title='Reset Password', form=form)
-
-
+    return render_template('reset_token.html',
+                           title='Reset Password',
+                           form=form)
