@@ -36,12 +36,6 @@ def test_valid_login_logout(base_client, init_database):
     assert b"Login Form" in response.data
 
 
-def test_account_page(base_client):
-    response = base_client.get('/account')
-    assert response.status_code == 403
-    assert b"Access Denied" in response.data
-
-
 def test_home_page(login_disabled_client):
     response = login_disabled_client.get('/home')
     assert response.status_code == 200
