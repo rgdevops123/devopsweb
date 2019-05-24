@@ -144,6 +144,8 @@
 
     $ pytest -k unittests
        -k <substring>              ### Only run tests with substring. 
+    $ nose2 -v
+       -v                          ### Verbose
 
 ### ============================================
 ### Run coverage.py testing 123

@@ -29,12 +29,17 @@ class BaseTestCase(TestCase):
         admin = User(username="admin",
                      email="admin@test.com",
                      password=hashed_password)
-        testuser = User(username="testuser1",
+        testuser1 = User(username="testuser1",
                         email="testuser1@test.com",
                         password=hashed_password)
 
+        testuser2 = User(username="testuser2",
+                        email="testuser2@test.com",
+                        password=hashed_password)
+
         db.session.add(admin)
-        db.session.add(testuser)
+        db.session.add(testuser1)
+        db.session.add(testuser2)
         db.session.commit()
 
     def tearDown(self):
@@ -74,12 +79,22 @@ class FlaskTestCase(BaseTestCase):
             self.assertIn(b'Home', response.data)
             self.assertTrue(current_user.username == 'admin')
 
+    def test_login_page_with_bad_password(self):
+        with self.client:
+            response = self.client.post(
+                '/login',
+                data=dict(email="admin@test.com", password="111"),
+                follow_redirects=True)
+            self.assertEqual(response.status_code, 200)
+            self.assertIn(b'403', response.data)
+            self.assertIn(b'Access Denied', response.data)
+
     # Ensure that register page works correctly.
     def test_register_page(self):
         response = self.client.post(
             '/register',
-            data=dict(username='testuser2',
-                      email="testuser2@test.com",
+            data=dict(username='testuser3',
+                      email="testuser3@test.com",
                       password="123",
                       confirm_password='123'),
             follow_redirects=True)
@@ -90,7 +105,7 @@ class FlaskTestCase(BaseTestCase):
     def test_register_page_with_taken_username(self):
         response = self.client.post(
             '/register',
-            data=dict(username='admin',
+            data=dict(username='testuser1',
                       email="testuser3@test.com",
                       password="123",
                       confirm_password='123'),
@@ -103,7 +118,7 @@ class FlaskTestCase(BaseTestCase):
         response = self.client.post(
             '/register',
             data=dict(username='testuser3',
-                      email="admin@test.com",
+                      email="testuser2@test.com",
                       password="123",
                       confirm_password='123'),
             follow_redirects=True)
@@ -151,6 +166,42 @@ class FlaskTestCase(BaseTestCase):
             self.assertIn(b'Account Info', response.data)
             self.assertTrue(current_user.username == 'admin1')
 
+    # Ensure that the user can't update account with taken username.
+    def test_update_account_page_with_taken_username(self):
+        with self.client:
+            response = self.client.post(
+                '/login',
+                data=dict(email="testuser1@test.com", password="123"),
+                follow_redirects=True)
+            response = self.client.post(
+                '/account',
+                data=dict(username='testuser2',
+                          email="testuser1@test.com",
+                          company="testCompany"),
+                follow_redirects=True)
+            self.assertEqual(response.status_code, 200)
+            self.assertIn(b'Account Info', response.data)
+            self.assertIn(b'Username already taken.', response.data)
+            self.assertTrue(current_user.username == 'testuser1')
+
+    # Ensure that the user can't update account with taken email.
+    def test_update_account_page_with_taken_email(self):
+        with self.client:
+            response = self.client.post(
+                '/login',
+                data=dict(email="testuser1@test.com", password="123"),
+                follow_redirects=True)
+            response = self.client.post(
+                '/account',
+                data=dict(username='testuser1',
+                          email="testuser2@test.com",
+                          company="testCompany"),
+                follow_redirects=True)
+            self.assertEqual(response.status_code, 200)
+            self.assertIn(b'Account Info', response.data)
+            self.assertIn(b'Email already taken.', response.data)
+            self.assertTrue(current_user.username == 'testuser1')
+
     # Ensure that the reset request page works correctly.
     def test_reset_request_page(self):
         with self.client:
@@ -171,14 +222,59 @@ class FlaskTestCase(BaseTestCase):
             self.assertEqual(response.status_code, 200)
             self.assertIn(b'Account does not exist.', response.data)
 
-    # Ensure that the reset password page works correctly.
-    def test_reset_password_page(self):
+    # Ensure that the reset password page works correctly with bad token.
+    def test_reset_password_page_with_bad_token(self):
         with self.client:
             response = self.client.post(
                 '/reset_password/123',
                 follow_redirects=True)
             self.assertEqual(response.status_code, 200)
             self.assertIn(b'invalid or expired token', response.data)
+
+    # Ensure that the reset token works correctly.
+    def test_reset_token_page_with_valid_token(self):
+        with self.client:
+            user = User.query.filter_by(email="testuser2@test.com").first()
+            token = user.get_reset_token()
+            response = self.client.post(
+                '/reset_password/' + token,
+                follow_redirects=True)
+            self.assertEqual(response.status_code, 200)
+            self.assertIn(b'Reset Password', response.data)
+
+    # Ensure that resetting password works correctly.
+    def test_resetting_password(self):
+        with self.client:
+            user = User.query.filter_by(email="testuser2@test.com").first()
+            token = user.get_reset_token() 
+            response = self.client.post(
+                '/reset_password/' + token,
+                data=dict(password="111",
+                          confirm_password='111'),
+                follow_redirects=True)
+            self.assertEqual(response.status_code, 200)
+            self.assertIn(b'Your password has been updated!', response.data)
+
+
+    # Ensure that password reset pages work correctly while logged in.
+    def test_password_reset_pages_while_logged_in(self):
+        with self.client:
+            user = User.query.filter_by(email="testuser2@test.com").first()
+            token = user.get_reset_token()
+            response = self.client.post(
+                '/login',
+                data=dict(email="testuser2@test.com", password="123"),
+                follow_redirects=True)
+            response = self.client.get('/reset_request',
+                                       follow_redirects=True)
+            self.assertEqual(response.status_code, 200)
+            self.assertIn(b'Home', response.data)
+            self.assertTrue(current_user.username == 'testuser2')
+            response = self.client.get('/reset_password/' + token,
+                                       follow_redirects=True)
+            self.assertEqual(response.status_code, 200)
+            self.assertIn(b'Home', response.data)
+            self.assertTrue(current_user.username == 'testuser2')
 
 
 if __name__ == '__main__':

@@ -10,7 +10,7 @@ __pycache__/
 *.pytest_cache
 .coverage
 coverage
-htmlcov
+coverage_html_report
 
 # database & logs
 *.db
