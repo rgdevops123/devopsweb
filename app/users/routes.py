@@ -37,18 +37,16 @@ def register():
                                    title='Register',
                                    form=form)
 
-        if request:
-
-            try:
-                db.session.add(user)
-                db.session.commit()
-            except Exception as e:
-                logger.debug("ERROR: Adding user {}.".format(user))
-                logger.debug("ERROR {}.".format(e))
-            else:
-                flash('Your account has been created!', 'success')
-                logger.debug("Created user {} in Database.".format(user))
-                return redirect(url_for('users_blueprint.login'))
+        try:
+            db.session.add(user)
+            db.session.commit()
+        except Exception as e:
+            logger.debug("ERROR: Adding user {}.".format(user))
+            logger.debug("ERROR {}.".format(e))
+        else:
+            flash('Your account has been created!', 'success')
+            logger.debug("Created user {} in Database.".format(user))
+            return redirect(url_for('users_blueprint.login'))
 
     return render_template('register.html', title='Register', form=form)
 
