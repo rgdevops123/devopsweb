@@ -22,10 +22,10 @@ class TestBase(LiveServerTestCase):
     """A base test case."""
 
     def create_app(self):
-        app = create_app(config_dict['Test'])
+        app = create_app(config_dict['Test1'])
         app.config.update(
             # Change the port that the liveserver listens on
-            LIVESERVER_PORT=5000
+            LIVESERVER_PORT=8933
         )
         return app
 

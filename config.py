@@ -29,7 +29,7 @@ class DebugConfig(Config):
     DEBUG = True
 
 
-class TestConfig(Config):
+class TestConfig1(Config):
     DEBUG = True
     LOGIN_DISABLED = True
     TESTING = True
@@ -39,8 +39,19 @@ class TestConfig(Config):
     SECRET_KEY = '12346789'
 
 
+class TestConfig2(Config):
+    DEBUG = True
+    LOGIN_DISABLED = False
+    TESTING = True
+    WTF_CSRF_ENABLED = False
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SECRET_KEY = '12346789'
+
+
 config_dict = {
     'Production': ProductionConfig,
     'Debug': DebugConfig,
-    'Test': TestConfig
+    'Test1': TestConfig1,
+    'Test2': TestConfig2
 }

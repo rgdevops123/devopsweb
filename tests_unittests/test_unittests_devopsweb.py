@@ -18,7 +18,7 @@ class BaseTestCase(TestCase):
     """A base test case."""
 
     def create_app(self):
-        app = create_app(config_dict['Test'])
+        app = create_app(config_dict['Test2'])
         return app
 
     def setUp(self):
@@ -47,12 +47,18 @@ class BaseTestCase(TestCase):
         db.drop_all()
 
 
-class TestLoginCase(BaseTestCase):
+class TestLoginLogoutCase(BaseTestCase):
 
     """Ensure that root page requires user login."""
     def test_root_route_requires_login(self):
         response = self.client.get('/', follow_redirects=True)
         self.assertIn(b'Login Form', response.data)
+
+    """Ensure unauthorized access."""
+    def test_unauthorized_access(self):
+        response = self.client.get('/home', follow_redirects=True)
+        self.assertIn(b'403', response.data)
+        self.assertIn(b'Access Denied', response.data)
 
     """Ensure that user goes to home page after login."""
     def test_home_page(self):
@@ -84,6 +90,17 @@ class TestLoginCase(BaseTestCase):
             self.assertEqual(response.status_code, 200)
             self.assertIn(b'403', response.data)
             self.assertIn(b'Access Denied', response.data)
+
+    """Ensure that the logout page works correctly."""
+    def test_logout_page(self):
+        with self.client:
+            response = self.client.post(
+                '/login',
+                data=dict(email="admin@test.com", password="123"),
+                follow_redirects=True)
+            response = self.client.get('/logout', follow_redirects=True)
+            self.assertEqual(response.status_code, 200)
+            self.assertIn(b'Login Form', response.data)
 
 
 class TestRegistrationCase(BaseTestCase):

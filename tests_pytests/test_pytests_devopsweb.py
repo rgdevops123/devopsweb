@@ -12,7 +12,7 @@ class TestPages(object):
         response = base_client.get('/login')
         assert response.status_code == 200
         assert b"Login Form" in response.data
-    
+
 
     """Ensure that the register page works correctly."""
     def test_register_page(self, base_client):
