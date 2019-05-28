@@ -1,6 +1,5 @@
-from flask import jsonify, render_template, redirect, request, url_for
+from flask import redirect, url_for
 
-from app import login_manager
 from app.base import blueprint
 
 

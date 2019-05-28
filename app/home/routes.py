@@ -1,4 +1,4 @@
-from app.home import  blueprint
+from app.home import blueprint
 from flask import render_template
 from flask_login import login_required
 

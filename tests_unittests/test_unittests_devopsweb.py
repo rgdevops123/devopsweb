@@ -30,12 +30,12 @@ class BaseTestCase(TestCase):
                      email="admin@test.com",
                      password=hashed_password)
         testuser1 = User(username="testuser1",
-                        email="testuser1@test.com",
-                        password=hashed_password)
+                         email="testuser1@test.com",
+                         password=hashed_password)
 
         testuser2 = User(username="testuser2",
-                        email="testuser2@test.com",
-                        password=hashed_password)
+                         email="testuser2@test.com",
+                         password=hashed_password)
 
         db.session.add(admin)
         db.session.add(testuser1)
@@ -268,7 +268,7 @@ class TestResetPasswordCase(BaseTestCase):
     def test_resetting_password(self):
         with self.client:
             user = User.query.filter_by(email="testuser2@test.com").first()
-            token = user.get_reset_token() 
+            token = user.get_reset_token()
             response = self.client.post(
                 '/reset_password/' + token,
                 data=dict(password="111",
@@ -276,7 +276,6 @@ class TestResetPasswordCase(BaseTestCase):
                 follow_redirects=True)
             self.assertEqual(response.status_code, 200)
             self.assertIn(b'Your password has been updated!', response.data)
-
 
     """Ensure that password reset pages work correctly while logged in."""
     def test_password_reset_pages_while_logged_in(self):

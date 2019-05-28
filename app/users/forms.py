@@ -1,10 +1,12 @@
 from flask_wtf import FlaskForm
 from flask_login import current_user
 from wtforms import PasswordField, SubmitField, StringField
-from wtforms.validators import DataRequired, Email, EqualTo, Length, ValidationError
+from wtforms.validators import (DataRequired,
+                                Email,
+                                EqualTo,
+                                Length,
+                                ValidationError)
 from app.models import User
-
-### Login and Registration Forms
 
 
 class LoginForm(FlaskForm):
@@ -14,22 +16,23 @@ class LoginForm(FlaskForm):
 
 class RegistrationForm(FlaskForm):
     username = StringField('Username',
-                         validators=[DataRequired(), Length(min=3, max=23)])
+                           validators=[DataRequired(), Length(min=3, max=23)])
     email = StringField('Email',
-                      validators=[DataRequired(), Email()])
-    password = PasswordField('Password', 
+                        validators=[DataRequired(), Email()])
+    password = PasswordField('Password',
                              validators=[DataRequired()])
     confirm_password = PasswordField('Confirm Password',
-                                     validators=[DataRequired(), EqualTo('password')])
+                                     validators=[DataRequired(),
+                                                 EqualTo('password')])
 
 
 class UpdateAccountForm(FlaskForm):
     username = StringField('Username',
-                         validators=[DataRequired(), Length(min=3, max=23)])
+                           validators=[DataRequired(), Length(min=3, max=23)])
     email = StringField('Email',
                         validators=[DataRequired(), Email()])
     company = StringField('Company',
-                           validators=[Length(max=30)])
+                          validators=[Length(max=30)])
     submit = SubmitField('Update')
 
     def validate_username(self, username):
@@ -43,6 +46,7 @@ class UpdateAccountForm(FlaskForm):
             user = User.query.filter_by(email=email.data).first()
             if user:
                 raise ValidationError('Email already taken.')
+
 
 class RequestResetForm(FlaskForm):
     email = StringField('Email',
@@ -59,5 +63,5 @@ class ResetPasswordForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     confirm_password = PasswordField('Confirm Password',
                                      validators=[DataRequired(),
-                                     EqualTo('password')])
+                                                 EqualTo('password')])
     submit = SubmitField('Reset Password')

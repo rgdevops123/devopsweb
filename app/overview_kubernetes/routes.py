@@ -1,5 +1,5 @@
-from app.overview_kubernetes import  blueprint
-from flask import render_template, url_for
+from app.overview_kubernetes import blueprint
+from flask import render_template
 from flask_login import login_required
 
 

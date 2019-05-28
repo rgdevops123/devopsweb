@@ -1,10 +1,9 @@
-from bcrypt import gensalt, hashpw
 from flask import current_app
 from flask_login import UserMixin
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from sqlalchemy import LargeBinary, Column, Integer, String
 
-from app import db, login_manager
+from app import db, login_manager, logger
 
 
 class User(db.Model, UserMixin):
@@ -41,7 +40,8 @@ class User(db.Model, UserMixin):
         s = Serializer(current_app.config['SECRET_KEY'])
         try:
             user_id = s.loads(token)['user_id']
-        except:
+        except Exception as e:
+            logger.debug("ERROR {}.".format(e))
             return None
         return User.query.get(user_id)
 
@@ -52,4 +52,3 @@ class User(db.Model, UserMixin):
 @login_manager.user_loader
 def user_loader(id):
     return User.query.filter_by(id=id).first()
-

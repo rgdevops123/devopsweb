@@ -1,4 +1,4 @@
-from flask import Flask, url_for
+from flask import Flask
 from flask_login import LoginManager
 from flask_mail import Mail
 from flask_sqlalchemy import SQLAlchemy
@@ -25,12 +25,12 @@ def register_extensions(app):
 def register_blueprints(app):
     for module_name in ('base',
                         'home',
-                        'overview_ansible', 
-                        'overview_docker', 
-                        'overview_flask', 
-                        'overview_kubernetes', 
-                        'overview_linux', 
-                        'overview_postgresql', 
+                        'overview_ansible',
+                        'overview_docker',
+                        'overview_flask',
+                        'overview_kubernetes',
+                        'overview_linux',
+                        'overview_postgresql',
                         'overview_sqlite',
                         'users'):
         module = import_module('app.{}.routes'.format(module_name))
@@ -39,7 +39,7 @@ def register_blueprints(app):
 
 def register_error_handlers(app):
     module = import_module('app.errors.handlers')
-    app.register_blueprint(module.blueprint)
+    app.register_blueprint(module.errors)
 
 
 def configure_database(app):
@@ -57,8 +57,13 @@ def configure_logs(app):
     if not path.exists('logs'):
         mkdir('logs')
 
-    file_handler = RotatingFileHandler('logs/devopsweb.log', maxBytes=3000, backupCount=10)    
-    file_handler.setFormatter(Formatter('%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'))
+    file_handler = RotatingFileHandler(
+       'logs/devopsweb.log', maxBytes=3000, backupCount=10)
+
+    frmt = '%(asctime)s %(levelname)s: %(message)s [%(pathname)s:%(lineno)d]'
+    file_handler.setFormatter(
+        Formatter(frmt))
+
     file_handler.setLevel(DEBUG)
 
     stream_handler = StreamHandler()
@@ -78,4 +83,3 @@ def create_app(config, selenium=False):
     configure_logs(app)
     logger.info('Dev Ops Web Startup')
     return app
-

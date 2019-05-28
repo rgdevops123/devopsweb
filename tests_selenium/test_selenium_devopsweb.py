@@ -1,6 +1,5 @@
 from flask import url_for
-from flask_login import current_user
-from flask_testing import LiveServerTestCase, TestCase
+from flask_testing import LiveServerTestCase
 from bcrypt import gensalt, hashpw
 
 from config import config_dict
@@ -17,6 +16,7 @@ import unittest
 
 """Don't show logging messages while testing."""
 logging.disable(logging.CRITICAL)
+
 
 class TestBase(LiveServerTestCase):
     """A base test case."""
@@ -49,12 +49,12 @@ class TestBase(LiveServerTestCase):
                      email="admin@test.com",
                      password=hashed_password)
         testuser1 = User(username="testuser1",
-                        email="testuser1@test.com",
-                        password=hashed_password)
+                         email="testuser1@test.com",
+                         password=hashed_password)
 
         testuser2 = User(username="testuser2",
-                        email="testuser2@test.com",
-                        password=hashed_password)
+                         email="testuser2@test.com",
+                         password=hashed_password)
 
         db.session.add(admin)
         db.session.add(testuser1)
@@ -72,10 +72,10 @@ class TestRegistrationAndLoginCase(TestBase):
     def test_selenium_registration_and_login(self):
         """
         Test that a user can create an account using the registration form
-        if all fields are filled out correctly, and that they will be 
+        if all fields are filled out correctly and that user will be
         redirected to the login page.
         Then test that a user can login and that they will be redirected to
-        the homepage. 
+        the homepage.
         """
 
         """Click register menu link."""
@@ -124,10 +124,10 @@ class TestPages(TestBase):
         element = self.driver.find_element_by_id('devopsweb-page-title')
         assert element.text == 'Home'
 
-
     def test_selenium_overview_flask_page(self):
         """Ensure that the overview flask page works correctly."""
-        page_link = self.get_server_url() + url_for('overview_flask_blueprint.overview_flask')
+        page_link = self.get_server_url() + url_for(
+            'overview_flask_blueprint.overview_flask')
         self.driver.get(page_link)
         time.sleep(1)
 
@@ -135,10 +135,10 @@ class TestPages(TestBase):
         element = self.driver.find_element_by_id('devopsweb-page-title')
         assert element.text == 'Flask Overview'
 
-
     def test_selenium_overview_docker_page(self):
         """Ensure that the overview docker page works correctly."""
-        page_link = self.get_server_url() + url_for('overview_docker_blueprint.overview_docker')
+        page_link = self.get_server_url() + url_for(
+            'overview_docker_blueprint.overview_docker')
         self.driver.get(page_link)
         time.sleep(1)
 
@@ -146,10 +146,10 @@ class TestPages(TestBase):
         element = self.driver.find_element_by_id('devopsweb-page-title')
         assert element.text == 'Docker Overview'
 
-
     def test_selenium_overview_kubernetes_page(self):
         """Ensure that the overview kubernetes page works correctly."""
-        page_link = self.get_server_url() + url_for('overview_kubernetes_blueprint.overview_kubernetes')
+        page_link = self.get_server_url() + url_for(
+            'overview_kubernetes_blueprint.overview_kubernetes')
         self.driver.get(page_link)
         time.sleep(1)
 
@@ -157,10 +157,10 @@ class TestPages(TestBase):
         element = self.driver.find_element_by_id('devopsweb-page-title')
         assert element.text == 'Kubernetes Overview'
 
-
     def test_selenium_overview_sqlite_page(self):
         """Ensure that the overview sqlite page works correctly."""
-        page_link = self.get_server_url() + url_for('overview_sqlite_blueprint.overview_sqlite')
+        page_link = self.get_server_url() + url_for(
+            'overview_sqlite_blueprint.overview_sqlite')
         self.driver.get(page_link)
         time.sleep(1)
 
@@ -168,10 +168,10 @@ class TestPages(TestBase):
         element = self.driver.find_element_by_id('devopsweb-page-title')
         assert element.text == 'SQLite Commands and General Usage'
 
-
     def test_selenium_overview_postgresql_page(self):
         """Ensure that the overview postgresql page works correctly."""
-        page_link = self.get_server_url() + url_for('overview_postgresql_blueprint.overview_postgresql')
+        page_link = self.get_server_url() + url_for(
+            'overview_postgresql_blueprint.overview_postgresql')
         self.driver.get(page_link)
         time.sleep(1)
 
@@ -179,10 +179,10 @@ class TestPages(TestBase):
         element = self.driver.find_element_by_id('devopsweb-page-title')
         assert element.text == 'PostgreSQL Overview'
 
-
     def test_selenium_overview_ansible_page(self):
         """Ensure that the overview ansible page works correctly."""
-        page_link = self.get_server_url() + url_for('overview_ansible_blueprint.overview_ansible')
+        page_link = self.get_server_url() + url_for(
+            'overview_ansible_blueprint.overview_ansible')
         self.driver.get(page_link)
         time.sleep(1)
 

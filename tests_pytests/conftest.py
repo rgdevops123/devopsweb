@@ -1,4 +1,3 @@
-from bcrypt import gensalt, hashpw
 from config import config_dict
 from pytest import fixture
 from app import create_app, db
