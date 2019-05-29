@@ -31,6 +31,7 @@ def register_blueprints(app):
                         'overview_kubernetes',
                         'overview_linux',
                         'overview_postgresql',
+                        'overview_python',
                         'overview_sqlite',
                         'users'):
         module = import_module('app.{}.routes'.format(module_name))

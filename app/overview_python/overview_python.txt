@@ -1,0 +1,372 @@
+What is Python?  State some programming language features of Python.
+
+- Built-in Data Structures
+- Built-in Modules
+- embeddable into C programs 
+- extendable with C modules
+- free & open source
+- interactive
+- interpreted 
+- object oriented 
+- portable 
+
+
+
+Name some Python Errors.
+
+  AssertionError
+  EOFError
+  ImportError
+  IndentationError 
+  Index Error
+  IOError
+  KeyError
+  NameError
+  RuntimeError
+  StopIteration
+  SyntaxError
+  TypeError
+  ValueError
+  ZeroDivisionError
+
+
+
+Name some Python Modules.
+
+  DBs:
+
+anydbm, db
+
+ldap
+
+memcached, mongodb, mysql
+
+psycopg2
+
+redis
+
+sqlite3, sqlalchemy
+
+
+A3
+
+
+anydbm, argparse, array,
+
+aiohttp
+
+asyncio, asynchat, asyncore, 
+
+
+B2
+
+
+base64, bcrypt, bdb, 
+
+beautifulsoup, builtins, bz2
+
+
+C2
+
+calender, cgi, collections
+
+copy, crypt, csv
+
+
+D
+
+
+datetime, decimal, doctest
+
+
+E
+
+
+email
+
+
+F
+
+
+filecmp, flask, ftplib
+
+
+flask_bcrypt, _login, _mail,
+
+_sqlalchemy, _wtf, 
+
+gevent, gunicorn, itsdangerous, 
+
+PIL, psycopg2, sqlite
+
+wtforms
+
+unittest, nose(2), pytest
+
+selenium 
+
+G
+
+gc, getpass, gzip
+
+
+H2
+
+
+hashlib, heapq, hmac, 
+
+html, http, httplib
+
+
+I2
+
+
+imaplib, importlib, io
+
+ipaddress, iPython, itertools
+
+
+J
+
+
+json
+
+
+K
+
+
+keyword
+
+
+L
+
+
+ldap, locale, logging
+
+
+M3
+
+
+mailbox, mailcap, marshall, 
+
+math,mimetypes,multiprocessing
+
+(cmath)
+
+
+N
+
+
+nntplib, numbers, numpy, 
+
+
+O
+
+
+operator, optparse, os
+
+
+P3
+
+
+pdb, pickle, platform
+
+poplib, pprint, pwd
+
+psycopg2
+
+
+Q
+
+
+queue 
+
+
+R2
+
+
+random, re, readline,
+
+redis, requests, rlcompleter
+
+
+S5
+
+
+sar, shlex, shutil,
+
+smtpd, smtplib
+
+socketserver, socket, 
+
+sys, syslog, ssl, 
+
+spwd, stringIO, subprocess
+
+
+T2
+
+
+tarfile, thread, threading 
+
+time, tornado, twisted
+
+
+U
+
+
+unittest, urllib2, uuid
+
+
+V
+
+
+venv, vmstat
+
+
+W
+
+
+warnings, wave, webbrowser
+
+
+X
+
+
+xml, xmlrpc
+
+
+Y
+
+
+yaml
+
+
+Z
+
+
+zipfile, zipimport, zlib
+
+
+
+Name some Python Builtin functions.
+
+Builtins:
+
+ - Help   11
+
+       dir, help, type, chr, ord,
+
+       locals, globals, vars, 
+
+       print, repr, str
+
+ - Data Structures   5
+
+       list, tuple, set, fs, dict
+
+ - Work with Sequences   16
+
+       all, any, enumerate, filter, iter,
+
+       len, map, max, min, next,
+
+       range, reversed, 
+
+       slice, sorted, sum,
+
+       zip
+
+ - Numbers   9
+
+       int, float, complex,
+
+       bin, oct, hex,
+
+       abs, power, round,
+
+ - Classes & Properties   10
+
+       object, property,
+
+       classmethod, staticmethod,
+
+       isinstance, issupper,
+
+       setattr, hasattr, getattr,
+
+       delattr
+
+ - Extras   6
+
+       ascii, bool, compile,
+
+       divmod,
+
+       eval, exec, 
+
+
+
+Name some HTTP Status Codes from Python module http.HTTPStatus.
+
+
+1xx Informational
+
+  100 Continue
+
+  101 Switching Protocols
+
+  102 Processing
+
+
+2xx Success
+
+   200 OK
+
+   201 Created
+
+   202 Accepted
+
+
+3xx Redirection
+
+   300 Multiple Choices
+
+   301 Moved Permanently
+
+   302 Found
+
+
+4xx Client Error
+
+   400 Bad Request
+
+   401 Unauthorized
+
+   402 Payment Required
+
+   403 Forbidden
+
+   404 Not Found
+
+   405 Method Not Allowed
+
+   406 Not Acceptable
+
+   407 Proxy Auth Required
+
+   408 Request Timeout
+
+   409 Confilct
+
+   410 Gone
+
+
+5xx Server Error
+
+   500 Internal Server Error
+
+   501 Not Implemented
+
+   503 Service Unavailable
+

@@ -65,3 +65,9 @@ class TestPages(object):
         response = base_client.get('/overview-linux')
         assert response.status_code == 200
         assert b"Linux Overview" in response.data
+
+    """Ensure that the overview python page works correctly."""
+    def test_overview_python_page(self, base_client):
+        response = base_client.get('/overview-python')
+        assert response.status_code == 200
+        assert b"Python Overview" in response.data
