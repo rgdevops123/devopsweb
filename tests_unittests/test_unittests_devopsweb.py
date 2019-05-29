@@ -54,7 +54,7 @@ class TestLoginLogoutCase(BaseTestCase):
         response = self.client.get('/', follow_redirects=True)
         self.assertIn(b'Login Form', response.data)
 
-    """Ensure unauthorized access."""
+    """Ensure unauthorized access works correctly."""
     def test_unauthorized_access(self):
         response = self.client.get('/home', follow_redirects=True)
         self.assertIn(b'403', response.data)

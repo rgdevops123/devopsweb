@@ -190,6 +190,16 @@ class TestPages(TestBase):
         element = self.driver.find_element_by_id('devopsweb-page-title')
         assert element.text == 'Ansible Overview'
 
+    def test_selenium_page_not_found_error(self):
+        """Ensure that custom not found page works correctly."""
+        page_link = self.get_server_url() + '/nopage'
+        self.driver.get(page_link)
+        time.sleep(1)
+
+        """Assert that browser loads not found page."""
+        element = self.driver.find_element_by_id('devopsweb-page-title')
+        assert element.text == 'Page Not Found.'
+
 
 if __name__ == '__main__':
     unittest.main()
