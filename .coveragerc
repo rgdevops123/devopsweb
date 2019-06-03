@@ -15,10 +15,6 @@ exclude_lines =
     # Ignore catch all Exceptions
     except Exception as e:
 
-    # Ignore error pages
-    404.html
-    500.html
-
 ignore_errors = True
 
 [html]

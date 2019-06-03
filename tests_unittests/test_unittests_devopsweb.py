@@ -54,12 +54,6 @@ class TestLoginLogoutCase(BaseTestCase):
         response = self.client.get('/', follow_redirects=True)
         self.assertIn(b'Login Form', response.data)
 
-    """Ensure unauthorized access works correctly."""
-    def test_unauthorized_access(self):
-        response = self.client.get('/home', follow_redirects=True)
-        self.assertIn(b'403', response.data)
-        self.assertIn(b'Access Denied', response.data)
-
     """Ensure that user goes to home page after login."""
     def test_home_page(self):
         response = self.client.post(
@@ -89,7 +83,7 @@ class TestLoginLogoutCase(BaseTestCase):
                 follow_redirects=True)
             self.assertEqual(response.status_code, 200)
             self.assertIn(b'403', response.data)
-            self.assertIn(b'Access Denied', response.data)
+            self.assertIn(b'Forbidden', response.data)
 
     """Ensure that the logout page works correctly."""
     def test_logout_page(self):
@@ -296,6 +290,45 @@ class TestResetPasswordCase(BaseTestCase):
             self.assertEqual(response.status_code, 200)
             self.assertIn(b'Home', response.data)
             self.assertTrue(current_user.username == 'testuser2')
+
+
+class TestErrorPages(BaseTestCase):
+
+    """Ensure 401 page for unauthorized access works correctly."""
+    def test_401_unauthorized_access(self):
+        response = self.client.get('/home', follow_redirects=True)
+        self.assertIn(b'401', response.data)
+        self.assertIn(b'Full authentication is required', response.data)
+
+
+    """Ensure that the 403 error page works correctly."""
+    def test_403_error_page(self):
+        response = self.client.get('/devopsweb-403', follow_redirects=True)
+        self.assertIn(b'The request has been forbidden', response.data)
+
+
+    """Ensure that the 404 error page works correctly."""
+    def test_404_error_page(self):
+        response = self.client.get('/devopsweb-404', follow_redirects=True)
+        self.assertIn(b'That page does not exist', response.data)
+
+
+    """Ensure that the 500 error page works correctly."""
+    def test_500_error_page(self):
+        response = self.client.get('/devopsweb-500', follow_redirects=True)
+        self.assertIn(b'Internal Server Error', response.data)
+
+
+    """Ensure that the 501 error page works correctly."""
+    def test_501_error_page(self):
+        response = self.client.get('/devopsweb-501', follow_redirects=True)
+        self.assertIn(b'Not Implemented', response.data)
+
+
+    """Ensure that the 503 error page works correctly."""
+    def test_503_error_page(self):
+        response = self.client.get('/devopsweb-503', follow_redirects=True)
+        self.assertIn(b'Service Unavailable', response.data)
 
 
 if __name__ == '__main__':
