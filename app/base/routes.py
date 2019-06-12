@@ -3,13 +3,11 @@ from flask import abort, redirect, url_for
 from app.base import blueprint
 
 
-"""Default route."""
 @blueprint.route('/')
 def route_default():
     return redirect(url_for('users_blueprint.login'))
 
 
-"""Error pages."""
 @blueprint.route('/devopsweb-403')
 def route_devopsweb_403():
     abort(403)

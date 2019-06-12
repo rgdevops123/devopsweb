@@ -300,30 +300,25 @@ class TestErrorPages(BaseTestCase):
         self.assertIn(b'401', response.data)
         self.assertIn(b'Full authentication is required', response.data)
 
-
     """Ensure that the 403 error page works correctly."""
     def test_403_error_page(self):
         response = self.client.get('/devopsweb-403', follow_redirects=True)
         self.assertIn(b'The request has been forbidden', response.data)
-
 
     """Ensure that the 404 error page works correctly."""
     def test_404_error_page(self):
         response = self.client.get('/devopsweb-404', follow_redirects=True)
         self.assertIn(b'That page does not exist', response.data)
 
-
     """Ensure that the 500 error page works correctly."""
     def test_500_error_page(self):
         response = self.client.get('/devopsweb-500', follow_redirects=True)
         self.assertIn(b'Internal Server Error', response.data)
 
-
     """Ensure that the 501 error page works correctly."""
     def test_501_error_page(self):
         response = self.client.get('/devopsweb-501', follow_redirects=True)
         self.assertIn(b'Not Implemented', response.data)
-
 
     """Ensure that the 503 error page works correctly."""
     def test_503_error_page(self):
