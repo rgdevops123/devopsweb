@@ -35,7 +35,7 @@ Name some Python Modules.
 
   DBs:
 
-anydbm, db
+anydbm, dbm
 
 ldap
 
@@ -95,15 +95,18 @@ flask_bcrypt, _login, _mail,
 
 _sqlalchemy, _wtf, 
 
-gevent, gunicorn, itsdangerous, 
+gevent, gunicorn, 
 
-PIL, psycopg2, sqlite
+itsdangerous, 
 
-wtforms
+PIL, wtforms,
+
+psycopg2, sqlite
 
 unittest, nose(2), pytest
 
 selenium 
+
 
 G
 
