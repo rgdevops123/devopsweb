@@ -1,4 +1,6 @@
 matrix:
+  addons:
+    firefox: latest
   include:
     - language: python
       python:
