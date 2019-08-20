@@ -3,7 +3,7 @@ matrix:
     global:
       - MOZ_HEADLESS=1
   addons:
-    firefox: latest
+    firefox: stable
   include:
     - language: python
       python:
