@@ -8,6 +8,7 @@ from app.models import User
 
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 import logging
 import time
@@ -31,9 +32,11 @@ class TestBase(LiveServerTestCase):
 
     def setUp(self):
         """Setup the test driver and create test users"""
+        cap = DesiredCapabilities().FIREFOX
         options = Options()
         options.headless = True
         self.driver = webdriver.Firefox(
+            capabilities=cap,
             options=options,
             executable_path="./tests_selenium/geckodriver",
             log_path="./tests_selenium/geckodriver.log")

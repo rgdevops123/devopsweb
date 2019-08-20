@@ -139,6 +139,7 @@
 
 ### ============================================
 ### Run Tests
+      ### NOTE: Firefox needs to be installed for the Selenium tests to work.
     $ export SQLALCHEMY_DATABASE_URI_DEBUG='sqlite:////tmp/testdatabase.db'
     $ pytest -v --disable-pytest-warnings
        -v                          ### Verbose
@@ -150,9 +151,8 @@
        -v                          ### Verbose
 
 ### ============================================
-### Run coverage.py testing 123
+### Run coverage.py
     $ export SQLALCHEMY_DATABASE_URI_DEBUG='sqlite:////tmp/testdatabase.db'
     $ coverage run --source=./app -m pytest -v --disable-pytest-warnings
     $ coverage report
     $ coverage html
-
