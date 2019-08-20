@@ -1,16 +1,17 @@
-matrix:
-  env:
-    global:
-      - MOZ_HEADLESS=1
-  addons:
-    firefox: stable
-  include:
-    - language: python
-      python:
-        - 3.6.8
-      install:
-        - pip install -r requirements.txt
-      script:
-        - coverage run --source=./app -m pytest -v --disable-pytest-warnings
-      after_success:
-        - coveralls
+sudo: required
+
+language: python
+
+services:
+  - docker
+
+before_install:
+  - docker build . -t rgdevops123/devopsweb
+  - docker run -d --rm --name devopsweb -p 5000:5000 --env DEVOPSWEB_CONFIG_MODE=Test1 rgdevops123/devopsweb
+  - docker ps -a
+
+script:
+  - docker exec -it devopsweb /bin/bash -c "pytest -v --disable-pytest-warnings"
+
+after_success:
+  - coveralls
