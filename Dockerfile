@@ -23,5 +23,5 @@ RUN pip3 install --no-cache-dir -q -r requirements.txt
 EXPOSE 25
 EXPOSE 5000
 
-# Specify the command to run.
+# Specify the Entrypoint.
 ENTRYPOINT ["/devopsweb/docker-run.sh"]
