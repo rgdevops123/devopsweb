@@ -14,7 +14,7 @@ COPY tests_pytests tests_pytests
 COPY tests_selenium tests_selenium
 COPY tests_unittests tests_unittests
 
-RUN /usr/local/bin/pip3 install -r requirements.txt
+RUN /usr/bin/pip3 install -r requirements.txt
 
 EXPOSE 5000
 EXPOSE 25
