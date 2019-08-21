@@ -5,8 +5,6 @@ WORKDIR ${APPDIR}
 
 ENV FLASK_APP devopsweb.py
 
-RUN yum -y install firefox
-
 COPY config.py devopsweb.py docker-run.sh gunicorn.py requirements.txt ${APPDIR}
 COPY app app
 COPY migrations migrations
