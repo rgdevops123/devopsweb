@@ -14,7 +14,7 @@ before_install:
   - docker ps -a
 
 script:
-  - docker exec -it devopsweb /bin/bash -c "pytest -v --disable-pytest-warnings"
+  - docker exec -it -e TRAVIS_JOB_ID="$TRAVIS_JOB_ID" -e TRAVIS_BRANCH="$TRAVIS_BRANCH" devopsweb /bin/bash -c "pytest -v --disable-pytest-warnings"
 
 after_success:
   - coveralls
