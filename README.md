@@ -65,7 +65,7 @@
     export POSTGRES_PASSWORD=your-database-password
     export POSTGRES_DB=your-database-name
     export SECRET_KEY='your-secret-key'
-    export SQLALCHEMY_DATABASE_URI_DEBUG='sqlite:////tmp/database.db'
+    ###Use For Development###export SQLALCHEMY_DATABASE_URI='sqlite:////tmp/database.db'
     export SQLALCHEMY_TRACK_MODIFICATIONS=False
 
 
@@ -140,7 +140,7 @@
 ### ============================================
 ### Run Tests
       ### NOTE: Firefox needs to be installed for the Selenium tests to work.
-    $ export SQLALCHEMY_DATABASE_URI_DEBUG='sqlite:////tmp/testdatabase.db'
+    $ export SQLALCHEMY_DATABASE_URI='sqlite:////tmp/testdatabase.db'
     $ pytest -v --disable-pytest-warnings
        -v                          ### Verbose
        --disable-pytest-warnings   ### Disable pytest warnings.
@@ -152,7 +152,7 @@
 
 ### ============================================
 ### Run coverage.py
-    $ export SQLALCHEMY_DATABASE_URI_DEBUG='sqlite:////tmp/testdatabase.db'
+    $ export SQLALCHEMY_DATABASE_URI='sqlite:////tmp/testdatabase.db'
     $ coverage run --source=./app -m pytest -v --disable-pytest-warnings
     $ coverage report
     $ coverage html

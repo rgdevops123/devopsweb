@@ -35,3 +35,6 @@ _templates
 
 # javascript
 package-lock.json
+
+# Certificate Files
+*.pem
