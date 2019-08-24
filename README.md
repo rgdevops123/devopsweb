@@ -140,19 +140,21 @@
 ### ============================================
 ### Run Tests
       ### NOTE: Firefox needs to be installed for the Selenium tests to work.
-    $ export SQLALCHEMY_DATABASE_URI='sqlite:////tmp/testdatabase.db'
     $ pytest -v --disable-pytest-warnings
        -v                          ### Verbose
        --disable-pytest-warnings   ### Disable pytest warnings.
 
-    $ pytest -k unittests
-       -k <substring>              ### Only run tests with substring. 
-    $ nose2 -v
+    $ pytest -v --disable-pytest-warnings -k unittests
        -v                          ### Verbose
+       --disable-pytest-warnings   ### Disable pytest warnings.
+       -k <substring>              ### Only run tests with substring. 
+
+    $ nose2 -v -s tests_unittests
+       -v                          ### Verbose
+       -s START_DIR                ### Directory to start discovery ('.' default)
 
 ### ============================================
 ### Run coverage.py
-    $ export SQLALCHEMY_DATABASE_URI='sqlite:////tmp/testdatabase.db'
     $ coverage run --source=./app -m pytest -v --disable-pytest-warnings
     $ coverage report
     $ coverage html
