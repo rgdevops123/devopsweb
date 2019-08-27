@@ -113,6 +113,8 @@
         --name devopsweb  ### Name the Docker container devopsweb.
         -p 5000:5000      ### Publish a container's port. hostPort:containerPort
 
+    GOTO: http://127.0.0.1:5000
+
 
 ### ============================================
 ### Database Migrations
