@@ -140,7 +140,7 @@
     
 
 ### ============================================
-### Run Tests for the DEVOPSWEB Application.
+### Run Tests for the Application.
       ### NOTE: Firefox needs to be installed for the Selenium tests to work.
     $ pytest -v --disable-pytest-warnings
        -v                          ### Verbose
