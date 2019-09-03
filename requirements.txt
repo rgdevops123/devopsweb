@@ -11,6 +11,7 @@ flask_testing
 flask_wtf
 gunicorn
 nose2
+psycopg2
 pytest
 python-dotenv
 selenium

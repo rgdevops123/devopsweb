@@ -20,6 +20,7 @@ COPY tests_selenium tests_selenium
 COPY tests_unittests tests_unittests
 
 # Install Dependencies.
+RUN yum -y install postgresql-devel
 RUN pip3 install --no-cache-dir -q -r requirements.txt
 
 # Set a Health Check.
