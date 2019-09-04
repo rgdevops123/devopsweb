@@ -13,7 +13,7 @@ class Config(object):
     MAIL_PASSWORD = environ.get('MAIL_PASSWORD')
 
 
-class ProductionConfig(Config):
+class ProductionConfigPGDB(Config):
     DEBUG = False
 
     """PostgreSQL Database"""
@@ -22,6 +22,19 @@ class ProductionConfig(Config):
         environ.get('DEVOPSWEB_DATABASE_PASSWORD', 'devopsweb'),
         environ.get('DEVOPSWEB_DATABASE_HOST', 'db'),
         environ.get('DEVOPSWEB_DATABASE_PORT', 5432),
+        environ.get('DEVOPSWEB_DATABASE_NAME', 'devopsweb')
+    )
+
+
+class ProductionConfigMDB(Config):
+    DEBUG = False
+
+    """MariaDB/MySQL Database"""
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://{}:{}@{}:{}/{}'.format(
+        environ.get('DEVOPSWEB_DATABASE_USER', 'devopsweb'),
+        environ.get('DEVOPSWEB_DATABASE_PASSWORD', 'devopsweb'),
+        environ.get('DEVOPSWEB_DATABASE_HOST', 'db'),
+        environ.get('DEVOPSWEB_DATABASE_PORT', 3306),
         environ.get('DEVOPSWEB_DATABASE_NAME', 'devopsweb')
     )
 
@@ -51,7 +64,8 @@ class TestConfig2(Config):
 
 
 config_dict = {
-    'Production': ProductionConfig,
+    'ProductionPGDB': ProductionConfigPGDB,
+    'ProductionMDB': ProductionConfigMDB,
     'Debug': DebugConfig,
     'Test1': TestConfig1,
     'Test2': TestConfig2
