@@ -11,11 +11,8 @@ flask_testing
 flask_wtf
 gunicorn
 nose2
-<<<<<<< HEAD
 PyMySQL
-=======
 psycopg2
->>>>>>> e4927c787463686272035bfe992443ea1bbea071
 pytest
 python-dotenv
 selenium
