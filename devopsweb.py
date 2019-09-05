@@ -8,7 +8,7 @@ from app import create_app, db
 get_config_mode = environ.get('DEVOPSWEB_CONFIG_MODE', 'Debug')
 
 try:
-    config_mode = config_dict[get_config_mode.capitalize()]
+    config_mode = config_dict[get_config_mode]
 except KeyError:
     exit('Error: Invalid DEVOPS_CONFIG_MODE environment variable.')
 
