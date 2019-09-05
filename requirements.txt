@@ -12,7 +12,7 @@ flask_wtf
 gunicorn
 nose2
 psycopg2
-PyMySQL
+pymysql
 pytest
 python-dotenv
 selenium
