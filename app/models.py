@@ -11,15 +11,15 @@ class User(db.Model, UserMixin):
     __tablename__ = 'user'
 
     id = Column(Integer, primary_key=True)
-    username = Column(String, unique=True)
-    email = Column(String, unique=True)
+    username = Column(String(255), unique=True)
+    email = Column(String(255), unique=True)
     password = Column(LargeBinary)
-    phone = Column(String)
-    mobile = Column(String)
-    department = Column(String)
-    company = Column(String)
-    location = Column(String)
-    title = Column(String)
+    phone = Column(String(255))
+    mobile = Column(String(255))
+    department = Column(String(255))
+    company = Column(String(255))
+    location = Column(String(255))
+    title = Column(String(255))
 
     @classmethod
     def is_user_name_taken(cls, username):
